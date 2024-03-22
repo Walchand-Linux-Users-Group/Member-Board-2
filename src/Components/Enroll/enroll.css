@@ -1,0 +1,16 @@
+.buttoncss{
+    border: 2px black solid;
+    border-radius: 10px;
+    padding: auto;
+}
+.buttoncss:hover{
+    background-color: lightblue;
+    scale: 1.25;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.links{
+    margin: 20px;
+}
