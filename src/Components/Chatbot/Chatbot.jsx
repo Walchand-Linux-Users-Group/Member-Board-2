@@ -70,7 +70,7 @@ const ChatBot = () => {
 
   return (
     <div className="chatbot-container">
-      <div className="chatbot">
+      <div className="chatbot" id="chatbot">
         <div className="chatbot-messages">
           {questions.slice(0, step + 1).map((question, index) => (
             <div key={index} className="message">
