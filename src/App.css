@@ -1,22 +1,35 @@
-.maincon{
+
+.maincon {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   position: relative; 
   z-index: 10;
 }
-.seccon{
+
+.seccon {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  position: relative; /* Ensure the secondary container is positioned */
+  position: relative; 
   z-index: 10;
 }
 
 .Back {
-  position: fixed; /* Position the canvas fixed to cover the entire viewport */
+  position: fixed;
   top: 0;
   left: 0;
   scale: 1.5;
+}
+
+@media (max-width: 768px) {
+  .maincon {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .seccon {
+    margin-bottom: 20px; 
+  }
 }

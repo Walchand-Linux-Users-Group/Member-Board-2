@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 import Chatbot from "./Components/Chatbot/Chatbot";
 import Tux from "./Components/Tux/Tux";
@@ -8,17 +9,16 @@ import { WavyBackground } from "./ui/wavy-back.jsx";
 function App() {
   return (
     <>
-        {/* <div className="maincon">
-          <div className="seccon">
-            <Title />
-            <Enroll />
-          </div>
-
-          <Tux />
+      <div className="maincon">
+        <div className="seccon">
+          <Title />
+          <Enroll />
         </div>
+        <Tux />
+      </div>
       <div className="Back">
-      <WavyBackground/>
-      </div> */}
+        <WavyBackground/>
+      </div>
       <Chatbot/>
     </>
   );
