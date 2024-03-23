@@ -8,7 +8,7 @@ import { WavyBackground } from "./ui/wavy-back.jsx";
 function App() {
   return (
     <>
-        <div className="maincon">
+        {/* <div className="maincon">
           <div className="seccon">
             <Title />
             <Enroll />
@@ -18,8 +18,8 @@ function App() {
         </div>
       <div className="Back">
       <WavyBackground/>
-      </div>
-      {/* <Chatbot/> */}
+      </div> */}
+      <Chatbot/>
     </>
   );
 }

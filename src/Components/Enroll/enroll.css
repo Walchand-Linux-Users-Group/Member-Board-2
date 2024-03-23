@@ -4,12 +4,12 @@
     padding: 5px;
     border-radius: 5px;
     text-decoration: none;
-    color: #333;
+    color: #f0e5e5;
     transition: background-color 0.2s ease-in-out;
   }
   
   .links a:hover {
-    background-color: lightblue;
+    background-color: rgb(115, 158, 236);
     color: white;
   }
   

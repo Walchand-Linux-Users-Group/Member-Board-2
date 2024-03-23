@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './Chatbot.css';
 
 const ChatBot = () => {
-  const [messages, setMessages] = useState([]);
-  const [userInput, setUserInput] = useState('');
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [isDropdown, setIsDropdown] = useState(false);
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const questions = [
     'What is your full name?',
@@ -27,72 +27,81 @@ const ChatBot = () => {
     'Civil',
   ];
 
-  const handleUserInput = (e) => {
-    setUserInput(e.target.value);
-  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    let errorMessage = '';
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (userInput.trim()) {
-      const newMessage = { text: userInput, sender: 'user' };
-      setMessages([...messages, newMessage]);
-      handleUserResponse(newMessage.text);
-      setUserInput('');
-      if (currentQuestion < questions.length - 1) {
-        setCurrentQuestion(currentQuestion + 1);
+    if (name === 'branch') {
+      setAnswers({ ...answers, [name]: value });
+    } else {
+      setAnswers({ ...answers, [questions[step]]: value });
+      if (name === 'mobile number' && !validatePhoneNumber(value)) {
+        errorMessage = 'Please provide a valid phone number.';
+      } else if (name === 'email' && !validateEmail(value)) {
+        errorMessage = 'Please provide a valid email address.';
       }
+      setError(errorMessage);
     }
   };
 
-  const handleUserResponse = (response) => {
-    console.log(`Question ${currentQuestion}: ${response}`);
+  const handleNext = () => {
+    if (step !== 1 && !answers[questions[step]]) {
+      setError('Please fill out this field.');
+      return;
+    }
+    if (step === questions.length - 1) {
+      console.log(answers);
+      setSuccess(true);
+      return;
+    }
+    setStep(step + 1);
+    setError('');
+  };
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const regex = /^\d+$/;
+    return regex.test(phoneNumber);
+  };
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   };
 
   return (
-    <div className="chat-bot">
-      <div className="chat-window">
-        <div className="messages">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`message ${message.sender === 'user' ? 'user' : 'bot'}`}
-            >
-              {message.text}
+    <div className="chatbot-container">
+      <div className="chatbot">
+        <div className="chatbot-messages">
+          {questions.slice(0, step + 1).map((question, index) => (
+            <div key={index} className="message">
+              <div className="message-text">{question}</div>
+              {index === 1 ? (
+                <select name="branch" onChange={handleChange}>
+                  <option value="">Select Branch</option>
+                  {branches.map((branch, i) => (
+                    <option key={i} value={branch}>
+                      {branch}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  type={index === 2 ? 'tel' : 'text'}
+                  name={index === 2 ? 'mobile number' : index === 3 ? 'email' : ''}
+                  onChange={handleChange}
+                />
+              )}
+              {error && index === step && <div className="error">{error}</div>}
             </div>
           ))}
-          {currentQuestion < questions.length && (
-            <div className="message bot">{questions[currentQuestion]}</div>
-          )}
         </div>
-        <form onSubmit={handleSubmit} className="input-form">
-          <input
-            type="text"
-            value={userInput}
-            onChange={handleUserInput}
-            placeholder="Type your response..."
-            className="input-field"
-            disabled={isDropdown}
-          />
-          <button type="submit" className="submit-button">
-            Send
+        {success ? (
+          <div className="success-message">Form submitted successfully!</div>
+        ) : (
+          <button className="next-button" onClick={handleNext}>
+            {step === questions.length - 1 ? 'Submit' : 'Next'}
           </button>
-          {currentQuestion === 1 && (
-            <select
-              className="input-field"
-              onChange={(e) => {
-                setUserInput(e.target.value);
-                setIsDropdown(true);
-              }}
-            >
-              <option value="">Select a branch</option>
-              {branches.map((branch, index) => (
-                <option key={index} value={branch}>
-                  {branch}
-                </option>
-              ))}
-            </select>
-          )}
-        </form>
+        )}
       </div>
     </div>
   );
