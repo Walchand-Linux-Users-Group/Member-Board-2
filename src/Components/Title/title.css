@@ -1,5 +1,10 @@
-
-.title2{
+.title2 {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
 }
+.title,
+.title2 {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: white; /* Set the text color to white */
+}
+

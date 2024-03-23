@@ -1,5 +1,3 @@
-"use client";
-import { cn } from "../../../utils/cn";
 import React, { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
 
@@ -14,27 +12,10 @@ export const WavyBackground = ({
   speed = "fast",
   waveOpacity = 0.5,
   ...props
-}: {
-  children?: any;
-  className?: string;
-  containerClassName?: string;
-  colors?: string[];
-  waveWidth?: number;
-  backgroundFill?: string;
-  blur?: number;
-  speed?: "slow" | "fast";
-  waveOpacity?: number;
-  [key: string]: any;
 }) => {
   const noise = createNoise3D();
-  let w: number,
-    h: number,
-    nt: number,
-    i: number,
-    x: number,
-    ctx: any,
-    canvas: any;
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  let w, h, nt, i, x, ctx, canvas;
+  const canvasRef = useRef(null);
   const getSpeed = () => {
     switch (speed) {
       case "slow":
@@ -49,26 +30,27 @@ export const WavyBackground = ({
   const init = () => {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
-    w = ctx.canvas.width = window.innerWidth;
-    h = ctx.canvas.height = window.innerHeight;
+    resizeCanvas(); // Call resizeCanvas initially
     ctx.filter = `blur(${blur}px)`;
     nt = 0;
-    window.onresize = function () {
-      w = ctx.canvas.width = window.innerWidth;
-      h = ctx.canvas.height = window.innerHeight;
-      ctx.filter = `blur(${blur}px)`;
-    };
+    window.addEventListener("resize", resizeCanvas); // Listen for window resize
     render();
   };
 
-  const waveColors = colors ?? [
+  const resizeCanvas = () => {
+    // Set canvas width and height to match the viewport dimensions
+    w = ctx.canvas.width = window.innerWidth;
+    h = ctx.canvas.height = window.innerHeight;
+  };
+
+  const waveColors = colors || [
     "#38bdf8",
     "#818cf8",
     "#c084fc",
     "#e879f9",
     "#22d3ee",
   ];
-  const drawWave = (n: number) => {
+  const drawWave = (n) => {
     nt += getSpeed();
     for (i = 0; i < n; i++) {
       ctx.beginPath();
@@ -83,7 +65,7 @@ export const WavyBackground = ({
     }
   };
 
-  let animationId: number;
+  let animationId;
   const render = () => {
     ctx.fillStyle = backgroundFill || "black";
     ctx.globalAlpha = waveOpacity || 0.5;
@@ -96,6 +78,7 @@ export const WavyBackground = ({
     init();
     return () => {
       cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resizeCanvas); // Cleanup event listener
     };
   }, []);
 
@@ -111,20 +94,20 @@ export const WavyBackground = ({
 
   return (
     <div
-      className={cn(
-        "h-screen flex flex-col items-center -z-100 justify-center absolute top-0 left-0",
+      className={
+        "h-screen flex flex-col items-center -z-100 justify-center " +
         containerClassName
-      )}
+      }
     >
       <canvas
-        className="absolute flex inset-0 -z-10"
+        className="absolute inset-0 -z-10"
         ref={canvasRef}
         id="canvas"
         style={{
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       ></canvas>
-      <div className={cn("relative z-10", className)} {...props}>
+      <div className={"relative z-10 " + className} {...props}>
         {children}
       </div>
     </div>
