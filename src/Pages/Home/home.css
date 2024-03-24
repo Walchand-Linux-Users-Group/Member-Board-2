@@ -23,9 +23,11 @@
 .center {
     display: flex;
     position: relative;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     z-index: 100;
+    margin-left: 30px;
+    
 }
 
 .logo {

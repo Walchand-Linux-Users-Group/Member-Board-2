@@ -3,11 +3,12 @@ import "./App.css";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import HomePage from "./Pages/Home/HomePage";
 import ChatbotPage from "./Pages/Chatbot/ChatBotPage";
-import { WavyBackground } from "./ui/wavy-back";
+import { WavyBackground } from "./ui/wavy-backSRC";
+import { AuroraBackgroundDemo } from "./ui/aura-backDEMO"
 
 function App() {
     return (
-        <div>
+        <div className=" dark">
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage/>}></Route>
@@ -15,7 +16,8 @@ function App() {
                 </Routes>
             </BrowserRouter>
             <div className="Back">
-                <WavyBackground />
+                {/* <WavyBackground /> */}
+                <AuroraBackgroundDemo/>
             </div>
         </div>
     );
