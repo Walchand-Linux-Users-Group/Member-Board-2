@@ -1,57 +1,46 @@
-
 .homeboday {
     height: 100%;
-  }
-  
-  .maincon {
+}
+
+.maincon {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     position: relative;
     z-index: 10;
-  }
-  
-  .seccon {
+}
+
+.seccon {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    position: relative; 
+    position: relative;
     z-index: 10;
-  }
-  
-  .Back {
-    position: fixed;
-    top: 0;
-    left: 0;
-    scale: 1.5;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure it stays behind other content */
-  }
-  
-  .center {
+}
+
+
+.center {
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
     z-index: 100;
-  }
-  
-  .logo {
-    width: auto; 
+}
+
+.logo {
+    width: auto;
     height: 150px;
     z-index: 100;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .maincon {
-      flex-direction: column;
-      align-items: center;
+        flex-direction: column;
+        align-items: center;
     }
-    
+
     .seccon {
-      margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
-  }
-  
+}

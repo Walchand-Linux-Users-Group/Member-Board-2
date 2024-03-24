@@ -33,9 +33,6 @@ const HomePage = () => {
                         <Tux />
                     </div>
                 </div>
-                <div className="Back">
-                    <WavyBackground />
-                </div>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import HomePage from "./Pages/Home/HomePage";
 import ChatbotPage from "./Pages/Chatbot/ChatBotPage";
+import { WavyBackground } from "./ui/wavy-back";
 
 function App() {
     return (
@@ -13,6 +14,9 @@ function App() {
                     <Route path="/register" element={<ChatbotPage/>}></Route>
                 </Routes>
             </BrowserRouter>
+            <div className="Back">
+                <WavyBackground />
+            </div>
         </div>
     );
 }

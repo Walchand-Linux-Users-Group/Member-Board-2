@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{html,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        "chatbot":['"Exo 2"','sans-serif']
+      }
+    },
   },
   plugins: [],
 }
