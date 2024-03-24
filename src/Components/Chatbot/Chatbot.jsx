@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import './Chatbot.css';
-
 const ChatBot = () => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -69,12 +67,12 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="chatbot-container">
-      <div className="chatbot" id="chatbot">
-        <div className="chatbot-messages">
+    <div className='' >
+      <div >
+        <div >
           {questions.slice(0, step + 1).map((question, index) => (
-            <div key={index} className="message">
-              <div className="message-text">{question}</div>
+            <div key={index} >
+              <div >{question}</div>
               {index === 1 ? (
                 <select name="branch" onChange={handleChange}>
                   <option value="">Select Branch</option>
@@ -91,14 +89,14 @@ const ChatBot = () => {
                   onChange={handleChange}
                 />
               )}
-              {error && index === step && <div className="error">{error}</div>}
+              {error && index === step && <div>{error}</div>}
             </div>
           ))}
         </div>
         {success ? (
-          <div className="success-message">Form submitted successfully!</div>
+          <div >Form submitted successfully!</div>
         ) : (
-          <button className="next-button" onClick={handleNext}>
+          <button className="" onClick={handleNext}>
             {step === questions.length - 1 ? 'Submit' : 'Next'}
           </button>
         )}

@@ -1,46 +1,19 @@
 import React, { useRef } from "react";
 import "./App.css";
-import Chatbot from "./Components/Chatbot/Chatbot";
-import Tux from "./Components/Tux/Tux";
-import Title from "./Components/Title/Title";
-import Enroll from "./Components/Enroll/Enroll";
-import { WavyBackground } from "./ui/wavy-back.jsx";
-import Info from "./Components/Information/Info.jsx";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import HomePage from "./Pages/Home/HomePage";
+import ChatbotPage from "./Pages/Chatbot/ChatBotPage";
 
 function App() {
-    const chatbotRef = useRef(null);
-
-    const handleClickEnroll = () => {
-        chatbotRef.current.scrollIntoView({ behavior: "smooth" });
-    };
     return (
-        <>
-        <div className="homeboday">
-        <div className="center">
-          <a
-            href="https://www.wcewlug.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img className="logo" src="/Logo_White.png" alt="Logo" />
-          </a>
+        <div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HomePage/>}></Route>
+                    <Route path="/register" element={<ChatbotPage/>}></Route>
+                </Routes>
+            </BrowserRouter>
         </div>
-            <div className="maincon">
-                <div className="seccon">
-                   <Title />
-                   <Info/>
-                    <Enroll onClick={handleClickEnroll} />
-                </div>
-                <Tux />
-            </div>
-            <div className="Back">
-                <WavyBackground />
-            </div>
-            <div ref={chatbotRef}>
-                <Chatbot />
-            </div>
-            </div>
-        </>
     );
 }
 
