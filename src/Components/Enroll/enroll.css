@@ -1,34 +1,45 @@
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
 .links a {
-    display: block;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #f0e5e5;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .links a:hover {
-    background-color: rgb(115, 158, 236);
-    color: white;
-  }
-  
-  .buttoncss {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #333;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .buttoncss:hover {
-    background-color: lightblue;
-    color: white;
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  }
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #f0e5e5;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.links a:hover {
+  background-color: rgb(115, 158, 236);
+  color: white;
+}
+
+.buttoncss {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  color: #333;
+  font-size: 1.3m;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttoncss:hover {
+  background-color: rgb(14, 39, 230);
+  color: white;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}

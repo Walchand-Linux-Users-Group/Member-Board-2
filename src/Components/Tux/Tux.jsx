@@ -7,7 +7,7 @@ function Model(props) {
   const { nodes, materials } = useGLTF("/tux.glb");
 
   return (
-    <group {...props} dispose={null} scale={0.04}>
+    <group {...props} dispose={null} scale={0.05}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh
           castShadow

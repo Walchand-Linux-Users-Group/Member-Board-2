@@ -1,25 +1,38 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
 import Chatbot from "./Components/Chatbot/Chatbot";
 import Tux from "./Components/Tux/Tux";
 import Title from "./Components/Title/Title";
 import Enroll from "./Components/Enroll/Enroll";
 import { WavyBackground } from "./ui/wavy-back.jsx";
+import Info from "./Components/Information/Info.jsx";
 
 function App() {
   return (
     <>
-      <div className="maincon">
-        <div className="seccon">
-          <Title />
-          <Enroll />
+      <div className="homeboday">
+        <div className="center">
+          <a
+            href="https://www.wcewlug.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="logo" src="/Logo_White.png" alt="Logo" />
+          </a>
         </div>
-        <Tux />
+        <div className="maincon">
+          <div className="seccon">
+            <Title />
+            <Info/>
+            <Enroll />
+          </div>
+          <Tux />
+        </div>
+        <div className="Back">
+          <WavyBackground />
+        </div>
       </div>
-      <div className="Back">
-        <WavyBackground/>
-      </div>
-      <Chatbot/>
+      {/* <Chatbot/> */}
     </>
   );
 }
