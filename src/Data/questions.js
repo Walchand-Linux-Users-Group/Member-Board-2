@@ -22,7 +22,7 @@ export default [
                 message: "Please provide your name.",
             },
         },
-        field: "fullname",
+        field: "fullName",
     },
     {
         title: "Which branch are you from ?",
@@ -58,7 +58,7 @@ export default [
                 message: "Please provide a valid phone number.",
             },
         },
-        field: "phoneNo",
+        field: "mobileNo",
     },
     {
         title: "What is your email address ?",

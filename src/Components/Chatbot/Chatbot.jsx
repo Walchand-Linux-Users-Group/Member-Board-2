@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import TuxImg from "../../assets/tux.png";
 import questions from "../../Data/questions";
-import { ArrowLeft, SendHorizonalIcon, StepBackIcon } from "lucide-react";
+import { ArrowLeft, SendHorizonalIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Typewriter from "../Typewriter/Typewriter";
+
+
 const ChatBot = () => {
+    // For navigation
     const navigate = useNavigate();
 
+    // To Home
+    const toHome = () => {
+        navigate("/");
+    };
+
+    // State variables
     const [step, setStep] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState(questions[step]);
     const [answers, setAnswers] = useState({});
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
 
+    // Function to handle change in input fields
     const handleChange = (e) => {
         setError("");
         if (currentQuestion.ansType === "file") {
@@ -27,14 +37,20 @@ const ChatBot = () => {
         console.log(answers);
     };
 
+    // Function to handle next button click
     const handleNext = () => {
-        // if (currentQuestion.field === "submit") {
-        //     handleApply();
-        //     return;
-        // }
+        // If the current question is of type submit, then call handleApply function
+        if (currentQuestion.field === "submit") {
+            handleApply();
+            return;
+        }
+
+        // If the current question is of type end, then navigate to home
         if (step === questions.length - 1) {
             navigate("/");
         }
+
+        // If the current question is of type options, then check for valid option
         if (currentQuestion.ansType === "options") {
             if (
                 !currentQuestion.options.includes(
@@ -46,6 +62,7 @@ const ChatBot = () => {
             }
         }
 
+        // If the current question is of type text or file, then check for constraints
         if (
             currentQuestion.ansType === "text" ||
             currentQuestion.ansType === "file"
@@ -83,6 +100,8 @@ const ChatBot = () => {
                 }
             }
         }
+
+        // If the current question is of type text or file, then move to next question
         let cur = step + 1;
         setError("");
         setStep(cur);
@@ -90,50 +109,55 @@ const ChatBot = () => {
         document.getElementById(currentQuestion.field).value = "";
     };
 
-    const handleApply = async (e) => {
-        // e.preventDefault();
+    // Function to handle apply button click
+    const handleApply = async () => {
         const url = "http://localhost:5000/api/user/apply";
         const formData = new FormData();
-        console.log(answers)
-        formData.append("fullname", answers.fullname);
-        formData.append("branch", answers.branch);
-        formData.append("phoneNo", answers.phoneNo);
-        formData.append("resume", answers.resume);
-        formData.append("email", answers.email);
-        formData.append("photo", answers.photo);
-        formData.append("whyJoinClub", answers.whyJoinClub);
-        formData.append("favoriteQuote", answers.favoriteQuote);
-        
-        const res = await fetch(url, {
-            method: "POST",
-            // headers: {
-            //     "Content-Type": "multipart/form-data",
-            // },
-            body: answers,
-        });
 
-        if (res.status === 200) {
-            setSuccess(true);
-            console.log(res.json);
-            let cur = step + 1;
-            setError("");
-            setStep(cur);
-            setCurrentQuestion(questions[cur]);
-        } else {
-            setError("Something went wrong. Please try again later.");
+        // Append all answers to formData
+        for (const key in answers) {
+            formData.append(key, answers[key]);
+        }
+
+        try {
+            // Make a POST request to the server
+            const res = await fetch(url, {
+                method: "POST",
+                body: formData,
+            });
+
+            const json = await res.json();
+            if (res.success) {
+                setSuccess(true);
+                let cur = step + 1;
+                setError("");
+                setStep(cur);
+                setCurrentQuestion(questions[cur]);
+            } else {
+                setError(json.error);
+            }
+        } catch (error) {
+            setError(error.message);
         }
     };
     return (
         <div className="w-full space-y-4">
-            <div className="w-full flex flex-col justify-between p-6 min-h-[95vh] md:h-[86vh] md:min-h-[86vh] bg-gray-900 rounded-lg bg-opacity-60">
+            {/* Main container */}
+            <div className="w-full flex flex-col justify-between p-6 min-h-[95vh] md:h-[70vh] md:min-h-[70vh] bg-gray-900 rounded-lg bg-opacity-60">
+                {/* Tux Side */}
                 <div className="w-full flex space-x-4 md:space-x-6">
+                    {/* Tux Image */}
                     <div className="w-2/12 h-fit md:w-1/12 aspect-square rounded-full bg-gray-800 p-2">
                         <img src={TuxImg}></img>
                     </div>
+
+                    {/* Tux Conversation */}
                     <div className="w-9/12 md:w-10/12 space-y-4">
+                        {/* Message */}
                         <div className="min-h-24 w-full rounded-[35px] bg-gray-800 p-6 text-white font-mono font-semibold text-xl">
                             <Typewriter text={currentQuestion.title} />
                         </div>
+                        {/* Error */}
                         {error !== "" ? (
                             <div className="min-h-20 w-full rounded-[35px] bg-gray-800 p-6 font-mono font-semibold text-xl text-red-500">
                                 <Typewriter text={error} />
@@ -143,8 +167,10 @@ const ChatBot = () => {
                         )}
                     </div>
                 </div>
+                {/* User side */}
                 <div className="w-full flex justify-end">
                     <div className="w-full space-y-6">
+                        {/* if options show options */}
                         {currentQuestion.ansType === "options" ? (
                             <div className="md:ml-28 w-fit grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
                                 {currentQuestion.options.map(
@@ -169,11 +195,13 @@ const ChatBot = () => {
                         ) : (
                             <></>
                         )}
-                        {/* Laptop */}
+
+                        {/* Laptop input of users*/}
                         <div className="hidden md:flex w-full justify-between space-x-4">
+                            {/* Back button */}
                             <button
                                 onClick={(e) => {
-                                    if (step > 0) {
+                                    if (step > 0 && !success) {
                                         let cur = step - 1;
                                         setError("");
                                         setStep(cur);
@@ -187,6 +215,8 @@ const ChatBot = () => {
                                     className="w-6 h-6 md:w-10 md:h-10"
                                 />
                             </button>
+
+                            {/* Input field */}
                             {
                                 // If the current question is of type file, then show a file input field
                                 currentQuestion.ansType === "file" ? (
@@ -218,6 +248,7 @@ const ChatBot = () => {
                                 )
                             }
 
+                            {/* Next button */}
                             <button
                                 onClick={handleNext}
                                 className="h-16 md:h-24 py-4 px-4 md:px-8 bg-gray-800 rounded-[30px] border border-gray-400 hover:bg-gray-900"
@@ -228,8 +259,9 @@ const ChatBot = () => {
                                 />
                             </button>
                         </div>
-                        {/* Mobile */}
+                        {/* Mobile input  */}
                         <div className=" md:hidden w-full space-y-3">
+                            {/* Input field */}
                             {
                                 // If the current question is of type file, then show a file input field
                                 currentQuestion.ansType === "file" ? (
@@ -268,9 +300,10 @@ const ChatBot = () => {
                                 )
                             }
                             <div className="flex justify-between ">
+                                {/* Back Button */}
                                 <button
                                     onClick={(e) => {
-                                        if (step > 0) {
+                                        if (step > 0 && !success) {
                                             let cur = step - 1;
                                             setError("");
                                             setStep(cur);
@@ -284,6 +317,7 @@ const ChatBot = () => {
                                         className="w-8 h-8 md:w-10 md:h-10"
                                     />
                                 </button>
+                                {/* Next Button */}
                                 <button
                                     onClick={handleNext}
                                     className="h-16 md:h-24 py-4 px-4 md:px-8 bg-gray-800 rounded-[15px] border border-gray-400 hover:bg-gray-900"

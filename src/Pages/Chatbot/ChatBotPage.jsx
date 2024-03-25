@@ -4,8 +4,8 @@ import { WavyBackground } from "../../ui/wavy-back";
 
 const ChatbotPage = () => {
     return (
-        <div className="w-full md:p-14 p-4 flex justify-center items-center">
-                <ChatBot />
+        <div className="w-full min-h-screen md:p-14 p-4 flex justify-center items-center">
+            <ChatBot />
         </div>
     );
 };
