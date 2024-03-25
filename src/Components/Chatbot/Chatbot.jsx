@@ -111,7 +111,7 @@ const ChatBot = () => {
 
     // Function to handle apply button click
     const handleApply = async () => {
-        const url = "http://localhost:5000/api/user/apply";
+        const url = "https://wlug-mb2-backend.onrender.com/api/user/apply";
         const formData = new FormData();
 
         // Append all answers to formData
@@ -137,7 +137,7 @@ const ChatBot = () => {
                 setError(json.error);
             }
         } catch (error) {
-            setError(error.message);
+            setError("Something went wrong. Please try again.");
         }
     };
     return (
