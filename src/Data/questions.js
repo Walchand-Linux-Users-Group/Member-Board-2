@@ -1,6 +1,6 @@
 export default [
     {
-        title: "Hi, This is Tuxi.\n I will guide you through application. Are you ready ?",
+        title: "Hola Amigo, This is Tuxi. I will guide you through the application process. Are you ready? 🔥",
         ansType: "options",
         options: ["Yes"],
         nextStep: [1],
@@ -8,7 +8,7 @@ export default [
         field: "start",
     },
     {
-        title: "What is your full name ?",
+        title: "What is your full name?",
         ansType: "text",
         nextStep: 2,
         constraints: {
@@ -25,7 +25,7 @@ export default [
         field: "fullName",
     },
     {
-        title: "Which branch are you from ?",
+        title: "Which branch are you from?",
         ansType: "options",
         options: [
             "CSE",
@@ -55,13 +55,13 @@ export default [
             },
             pattern: {
                 value: /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/,
-                message: "Please provide a valid phone number.",
+                message: "Please provide a valid mobile number.",
             },
         },
         field: "mobileNo",
     },
     {
-        title: "What is your email address ?",
+        title: "What is your email address?",
         ansType: "text",
         nextStep: 5,
         constraints: {
@@ -103,13 +103,13 @@ export default [
         field: "resume",
     },
     {
-        title: "Share your favorite quote with us.",
+        title: "Share your favourite quote with us.",
         ansType: "text",
         nextStep: 6,
         constraints: {
             required: {
                 value: true,
-                message: "Please provide your favorite quote.",
+                message: "Please provide your favourite quote.",
             },
             length: {
                 min: 5,
@@ -117,7 +117,7 @@ export default [
                 message: "Please provide a valid quote. (10-100 characters)",
             },
         },
-        field: "favoriteQuote",
+        field: "favouriteQuote",
     },
     {
         title: "Why do you want to join this club? Please explain your reasons.",
@@ -137,7 +137,7 @@ export default [
         field: "whyJoinClub",
     },
     {
-        title: "Do you want to submit your application ?",
+        title: "Do you want to submit your application?",
         ansType: "options",
         options: ["Yes"],
         nextStep: [10],
@@ -145,7 +145,7 @@ export default [
         field: "submit",
     },
     {
-        title: "Thank you for applying. Your application has been submitted.",
+        title: "Thank you for applying. Your application has been submitted. Hope to see you soon at the interviews! 🐧",
         ansType: "text",
         nextStep: 0,
         constraints: [],
