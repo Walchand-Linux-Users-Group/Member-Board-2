@@ -1,5 +1,5 @@
 import React from "react";
-import { WavyBackground } from "../../ui/wavy-back";
+import { WavyBackground } from "../../ui/wavy-backSRC";
 import Title from "../../Components/Title/Title";
 import Enroll from "../../Components/Enroll/Enroll";
 import Info from "../../Components/Information/Info"
