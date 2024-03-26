@@ -14,6 +14,7 @@ const Typewriter = ({ text }) => {
         setDisplayText(text.substring(0, currentIndex));
         currentIndex++;
       } else {
+        tuxRef.current.scrollIntoView({ behavior: "smooth" });
         clearInterval(intervalId);
       }
     }, 70); // Adjust typing speed here (milliseconds)
