@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import TuxImg from "../../assets/tux.png";
 import UserImg from "../../assets/user.png";
 import questions from "../../Data/questions";
-import { SendHorizonalIcon } from "lucide-react";
+import { Radio, SendHorizonalIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Typewriter from "../Typewriter/Typewriter";
+import Popup from "reactjs-popup";
 const ChatBot = () => {
     const tuxRef = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +58,7 @@ const ChatBot = () => {
         if (currentQuestion.ansType === "options") {
             if (
                 !currentQuestion.options.includes(
-                    document.getElementById(currentQuestion.field).value
+                    answers[currentQuestion.field]
                 )
             ) {
                 setError("Please select a valid option.");
@@ -108,27 +109,32 @@ const ChatBot = () => {
             }
         }
 
-        setAnswered([
-            ...answered,
-            {
-                question: currentQuestion.title,
-                answer:
-                    currentQuestion.ansType !== "file"
-                        ? answers[currentQuestion.field]
-                        : answers[currentQuestion.field].name,
-                type: currentQuestion.ansType,
-                index: step,
-                field: currentQuestion.field,
-                constraints: currentQuestion.constraints,
-            },
-        ]);
+        let curans = {
+            question: currentQuestion.title,
+            answer:
+                currentQuestion.ansType !== "file"
+                    ? answers[currentQuestion.field]
+                    : answers[currentQuestion.field].name,
+            type: currentQuestion.ansType,
+            index: step,
+            field: currentQuestion.field,
+            constraints: currentQuestion.constraints,
+        };
 
         // If the current question is of type text or file, then move to next question
+
+        if (
+            currentQuestion.ansType === "text" ||
+            currentQuestion.ansType === "file"
+        ) {
+            document.getElementById(currentQuestion.field).value = "";
+        }
+
+        setAnswered([...answered, curans]);
         let cur = step + 1;
         setError("");
         setStep(cur);
         setCurrentQuestion(questions[cur]);
-        document.getElementById(currentQuestion.field).value = "";
     };
 
     const makeEditable = (index) => {
@@ -302,7 +308,7 @@ const ChatBot = () => {
                                                 >
                                                     {curque.type === "text" ? (
                                                         <input
-                                                            className=" w-full rounded-[15px] bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                                            className=" w-full rounded-[15px] bg-gray-800 outline-none text-xl p-2 text-gray-400"
                                                             placeholder={
                                                                 "Type here..."
                                                             }
@@ -319,48 +325,72 @@ const ChatBot = () => {
                                                         />
                                                     ) : curque.type ===
                                                       "options" ? (
-                                                        <select
-                                                            className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400"
-                                                            onChange={(e) =>
-                                                                handleEdit1(
-                                                                    e,
-                                                                    ind
-                                                                )
+                                                        <Popup
+                                                            trigger={
+                                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-2 text-gray-400 cursor-pointer ">
+                                                                    {
+                                                                        answered[ind].answer
+                                                                    }
+                                                                </div>
                                                             }
-                                                            onFocus={(e) => {
-                                                                setError("");
-                                                            }}
+                                                            modal
                                                         >
-                                                            <option
-                                                                value=""
-                                                                className="mb-5"
-                                                            >
-                                                                Select an option
-                                                            </option>
-                                                            {questions[
-                                                                ind
-                                                            ].options.map(
-                                                                (
-                                                                    option,
-                                                                    index
-                                                                ) => (
-                                                                    <option
-                                                                        key={
-                                                                            index
-                                                                        }
-                                                                        value={
+                                                            {(close) => (
+                                                                <div className="bg-gray-800 rounded-lg shadow-lg min-w-[300px] max-h-[300px] overflow-y-auto custom-scrollbar">
+                                                                    <div className="">
+                                                                        <h1 className="text-xl font-semibold text-gray-400 p-4 border-b border-gray-400">
+                                                                            Select
+                                                                            an
                                                                             option
-                                                                        }
-                                                                        className="bg-gray-800 text-gray-400 p-3 mt-8"
-                                                                    >
-                                                                        {option}
-                                                                    </option>
-                                                                )
+                                                                        </h1>
+                                                                        <div className="space-y-4">
+                                                                            {questions[
+                                                                                ind
+                                                                            ].options.map(
+                                                                                (
+                                                                                    option,
+                                                                                    index
+                                                                                ) => (
+                                                                                    <div
+                                                                                        className="bg-gray-800 text-gray-400 p-3 text-lg  cursor-pointer hover:bg-gray-700 hover:text-gray-300 "
+                                                                                        onClick={() => {
+                                                                                            setAnswers(
+                                                                                                {
+                                                                                                    ...answers,
+                                                                                                    [questions[
+                                                                                                        ind
+                                                                                                    ]
+                                                                                                        .field]:
+                                                                                                        [
+                                                                                                            option,
+                                                                                                        ],
+                                                                                                }
+                                                                                            );
+                                                                                            const temp =
+                                                                                                answered;
+                                                                                            temp[
+                                                                                                ind
+                                                                                            ].answer = option;
+                                                                                            setAnswered(
+                                                                                                temp
+                                                                                            );
+                                                                                            close();
+                                                                                        }}
+                                                                                    >
+                                                                                        {
+                                                                                            option
+                                                                                        }
+                                                                                    </div>
+                                                                                )
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             )}
-                                                        </select>
+                                                        </Popup>
                                                     ) : (
                                                         <input
-                                                            className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                                            className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-xl p-2 text-gray-400"
                                                             type="file"
                                                             onChange={(e) =>
                                                                 handleEdit2(
@@ -389,7 +419,7 @@ const ChatBot = () => {
                                                     >
                                                         <SendHorizonalIcon
                                                             color="white"
-                                                            className="w-8 h-8"
+                                                            className="w-6 h-6  "
                                                         ></SendHorizonalIcon>
                                                     </button>
                                                 </div>
@@ -458,29 +488,58 @@ const ChatBot = () => {
                                     />
                                 ) : currentQuestion.ansType === "options" ? (
                                     <>
-                                        <select
-                                            className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400"
-                                            id={currentQuestion.field}
-                                            onChange={handleChange}
-                                            onFocus={(e) => {
-                                                setError("");
-                                            }}
+                                        <Popup
+                                            trigger={
+                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400 cursor-pointer ">
+                                                    {answers[
+                                                        currentQuestion.field
+                                                    ] !== "" &&
+                                                    answers[
+                                                        currentQuestion.field
+                                                    ] !== undefined
+                                                        ? answers[
+                                                              currentQuestion
+                                                                  .field
+                                                          ]
+                                                        : "Select an option"}
+                                                </div>
+                                            }
+                                            modal
                                         >
-                                            <option value="" className="mb-5">
-                                                Select an option
-                                            </option>
-                                            {currentQuestion.options.map(
-                                                (option, index) => (
-                                                    <option
-                                                        key={index}
-                                                        value={option}
-                                                        className="bg-gray-800 text-gray-400 p-3 mt-8"
-                                                    >
-                                                        {option}
-                                                    </option>
-                                                )
+                                            {(close) => (
+                                                <div className="bg-gray-800 rounded-lg shadow-lg min-w-[300px] max-h-[300px] overflow-y-auto custom-scrollbar">
+                                                    <div className="">
+                                                        <h1 className="text-xl font-semibold text-gray-400 p-4 border-b border-gray-400">
+                                                            Select an option
+                                                        </h1>
+                                                        <div className="space-y-4">
+                                                            {currentQuestion.options.map(
+                                                                (
+                                                                    option,
+                                                                    index
+                                                                ) => (
+                                                                    <div
+                                                                        className="bg-gray-800 text-gray-400 p-3 text-lg  cursor-pointer hover:bg-gray-700 hover:text-gray-300 "
+                                                                        onClick={() => {
+                                                                            setAnswers(
+                                                                                {
+                                                                                    ...answers,
+                                                                                    [currentQuestion.field]:
+                                                                                        option,
+                                                                                }
+                                                                            );
+                                                                            close();
+                                                                        }}
+                                                                    >
+                                                                        {option}
+                                                                    </div>
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             )}
-                                        </select>
+                                        </Popup>
                                     </>
                                 ) : (
                                     <input
