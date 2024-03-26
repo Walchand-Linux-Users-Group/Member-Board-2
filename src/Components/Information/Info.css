@@ -1,22 +1,33 @@
-.infocon{
+.infocon {
     text-align: center;
     color: white;
+    width: 50%; /* Adjust as needed */
 }
 
-.ml{
+@media (max-width: 768px) {
+    .infocon {
+        width: 100%; /* Set to full width on smaller screens */
+    }
+}
+.typewriter-container {
+    max-width: 100%; /* Adjust as needed */
+    overflow: hidden; /* Prevent content from overflowing */
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-align: center; /* Center the content */
+  }
+  
+.infopara {
+    font-size: large;
+    text-align: center;
+    white-space: normal; /* Allow text to wrap */
+}
+
+.ml {
     margin-top: 2.5em;
     font-size: 24px;
 }
-.sl{
+
+.sl {
     font-size: 20px;
     margin-bottom: 2em;
-}
-/* .infol{
-    font-size: 30px;
-    font-weight: 600;
-} */
-
-.infopara{
-    font-size: large;
-    text-align: center;
 }
