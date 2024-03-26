@@ -268,7 +268,7 @@ const ChatBot = () => {
             {/* Main container */}
             <div
                 id="main-chat-cont"
-                className="relative lg:w-4/5 w-11/12 h-[90vh] bg-gray-900 rounded-lg bg-opacity-60"
+                className="relative lg:w-4/5 w-11/12 h-[86vh] md:h-[90vh] bg-gray-900 rounded-lg bg-opacity-60"
             >
                 <div className="overflow-y-scroll p-6 custom-scrollbar h-[70vh]">
                     {answered.length > 0 &&
