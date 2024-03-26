@@ -86,7 +86,7 @@ const ChatBot = () => {
                 if (currentQuestion.constraints.pattern) {
                     if (
                         !currentQuestion.constraints.pattern.value.test(
-                            document.getElementById(currentQuestion.field).value
+                            document.getElementById(currentQuestion.field).value.trim()
                         )
                     ) {
                         setError(currentQuestion.constraints.pattern.message);

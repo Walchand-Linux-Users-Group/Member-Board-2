@@ -137,9 +137,9 @@ export default [
                 message: "Please provide your reasons.",
             },
             length: {
-                min: 50,
+                min: 40,
                 max: 500,
-                message: "Please provide a valid reason. (50-500 characters)",
+                message: "Please provide a valid reason. (40-500 characters)",
             },
         },
         field: "whyJoinClub",
