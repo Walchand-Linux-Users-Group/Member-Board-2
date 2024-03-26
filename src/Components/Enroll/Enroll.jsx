@@ -2,13 +2,16 @@ import React from "react";
 import "./enroll.css";
 import { FaInstagram, FaLinkedin, FaDiscord, FaTwitter } from "react-icons/fa"; // Import icons as needed
 import { MovingBorderDemo } from "../../ui/btnDemo";
+import { useNavigate } from "react-router-dom";
 
 export default function Enroll({ onClick }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="main">
         <MovingBorderDemo
-          onClick={() => { /* Add onClick functionality here */ }}
+          onClick={() => {navigate("/register") }}
           text={"Enroll"}
         />
         <div className="links">
