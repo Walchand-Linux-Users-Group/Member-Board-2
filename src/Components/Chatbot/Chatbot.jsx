@@ -260,7 +260,7 @@ const ChatBot = () => {
     };
     useEffect(() => {
         tuxRef.current.scrollIntoView({ behavior: "smooth" });
-    }, [answered, error]);
+    }, [answered, error,currentQuestion]);
 
     return (
         <div className="w-full flex justify-center items-center">
