@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        "chatbot":['"Exo 2"','sans-serif']
+        "chatbot":['"Edu NSW ACT Foundation"', 'cursive']
       },
       animation: {
         aurora: "aurora 60s linear infinite",

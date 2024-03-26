@@ -8,6 +8,7 @@ const Typewriter = ({ text }) => {
   useEffect(() => {
     let currentIndex = 0;
 
+    if(!text) return;
     const intervalId = setInterval(() => {
       if (currentIndex <= text.length) {
         setDisplayText(text.substring(0, currentIndex));

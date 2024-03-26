@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TuxImg from "../../assets/tux.png";
+import UserImg from "../../assets/user.png";
 import questions from "../../Data/questions";
-import { ArrowLeft, SendHorizonalIcon } from "lucide-react";
+import { SendHorizonalIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Typewriter from "../Typewriter/Typewriter";
 
-
 const ChatBot = () => {
+    const tuxRef = useRef(null);
     // For navigation
     const navigate = useNavigate();
+
+    const [answered, setAnswered] = useState([]);
 
     // To Home
     const toHome = () => {
@@ -58,6 +61,7 @@ const ChatBot = () => {
                 )
             ) {
                 setError("Please select a valid option.");
+
                 return;
             }
         }
@@ -74,6 +78,7 @@ const ChatBot = () => {
                         !answers[currentQuestion.field]
                     ) {
                         setError(currentQuestion.constraints.required.message);
+
                         return;
                     }
                 }
@@ -84,6 +89,7 @@ const ChatBot = () => {
                         )
                     ) {
                         setError(currentQuestion.constraints.pattern.message);
+
                         return;
                     }
                 }
@@ -95,11 +101,23 @@ const ChatBot = () => {
                             .length > currentQuestion.constraints.length.max
                     ) {
                         setError(currentQuestion.constraints.length.message);
+
                         return;
                     }
                 }
             }
         }
+
+        setAnswered([
+            ...answered,
+            {
+                question: currentQuestion.title,
+                answer: answers[currentQuestion.field],
+                type: currentQuestion.ansType,
+                index: step,
+                field: currentQuestion.field,
+            },
+        ]);
 
         // If the current question is of type text or file, then move to next question
         let cur = step + 1;
@@ -109,6 +127,14 @@ const ChatBot = () => {
         document.getElementById(currentQuestion.field).value = "";
     };
 
+    const makeEditable = (index) => {
+        const userres = document
+            .getElementById(`userres${index}`)
+            .classList.toggle("hidden");
+
+        const usered = document.getElementById(`usered${index}`);
+        usered.classList.toggle("hidden");
+    };
     // Function to handle apply button click
     const handleApply = async () => {
         const url = "https://wlug-mb2-backend.onrender.com/api/user/apply";
@@ -127,7 +153,8 @@ const ChatBot = () => {
             });
 
             const json = await res.json();
-            if (res.success) {
+            if (res.ok) {
+                console.log(json);
                 setSuccess(true);
                 let cur = step + 1;
                 setError("");
@@ -140,195 +167,181 @@ const ChatBot = () => {
             setError("Something went wrong. Please try again.");
         }
     };
-    return (
-        <div className="w-full space-y-4">
-            {/* Main container */}
-            <div className="w-full flex flex-col justify-between p-6 min-h-[95vh] md:h-[70vh] md:min-h-[70vh] bg-gray-900 rounded-lg bg-opacity-60">
-                {/* Tux Side */}
-                <div className="w-full flex space-x-4 md:space-x-6">
-                    {/* Tux Image */}
-                    <div className="w-2/12 h-fit md:w-1/12 aspect-square rounded-full bg-gray-800 p-2">
-                        <img src={TuxImg}></img>
-                    </div>
 
-                    {/* Tux Conversation */}
-                    <div className="w-9/12 md:w-10/12 space-y-4">
-                        {/* Message */}
-                        <div className="min-h-24 w-full rounded-[35px] bg-gray-800 p-6 text-white font-mono font-semibold text-xl">
-                            <Typewriter text={currentQuestion.title} />
+    const handleEdit = (e, ind) => {
+        // // setAnswers({ ...answers, [currentQuestion.field]: e.target.value });
+        // let
+        let temp = answered;
+        temp[ind].answer = e.target.value;
+        setAnswered(temp);
+        console.log(answered);
+    };
+
+    useEffect(() => {
+        tuxRef.current.scrollIntoView({ behavior: "smooth" });
+    }, [answered]);
+    return (
+        <div className="w-full flex justify-center items-center">
+            {/* Main container */}
+            <div
+                id="main-chat-cont"
+                className="relative lg:w-4/5 w-11/12 h-[90vh] bg-gray-900 rounded-lg bg-opacity-60"
+            >
+                <div className="overflow-y-scroll p-6 custom-scrollbar h-[70vh]">
+                    {answered.length > 0 &&
+                        answered.map((curque, ind) => {
+                            return (
+                                <div className="w-full space-y-4">
+                                    <div className=" max-w-[85%]">
+                                        <div className="w-8 h-8 aspect-square rounded-full bg-gray-700 p-1">
+                                            <img src={TuxImg}></img>
+                                        </div>
+
+                                        <div className="ml-8 space-y-4">
+                                            <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-xl">
+                                                {curque.question}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="w-full flex justify-end">
+                                        <div className="flex flex-row-reverse max-w-[85%]">
+                                            <div className="w-8 h-8 aspect-square rounded-full bg-gray-700 p-1">
+                                                <img src={UserImg}></img>
+                                            </div>
+                                            <div className="w-fit mt-8">
+                                                <div
+                                                    className="cursor-pointer w-full bg-blue-800 p-3 md:p-6 rounded-[15px] text-white font-chatbot font-semibold text-xl"
+                                                    id={`userres${curque.index}`}
+                                                    onClick={() =>
+                                                        makeEditable(
+                                                            curque.index
+                                                        )
+                                                    }
+                                                >
+                                                    {curque.type != "file"
+                                                        ? curque.answer
+                                                        : curque.answer.name}
+                                                </div>
+                                                {/* create a inline input for editing respone */}
+                                                <input
+                                                    className="hidden w-full rounded-[15px] bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                                    placeholder={"Type here..."}
+                                                    onChange={(e) =>
+                                                        handleEdit(e, ind)
+                                                    }
+                                                    onFocus={(e) => {
+                                                        setError("");
+                                                    }}
+                                                    autoComplete="off"
+                                                    id={`usered${curque.index}`}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+
+                    {/* Tux Side */}
+                    <div className="w-full space-y-1 mt-4">
+                        {/* Tux Image */}
+                        <div className="w-8 h-8 aspect-square rounded-full bg-gray-700 p-1">
+                            <img src={TuxImg}></img>
                         </div>
-                        {/* Error */}
-                        {error !== "" ? (
-                            <div className="min-h-20 w-full rounded-[35px] bg-gray-800 p-6 font-mono font-semibold text-xl text-red-500">
-                                <Typewriter text={error} />
+
+                        {/* Tux Conversation */}
+                        <div className="ml-8 space-y-4">
+                            {/* Message */}
+                            <div
+                                className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-xl"
+                                id="tux-conv"
+                            >
+                                <Typewriter text={currentQuestion.title} />
                             </div>
-                        ) : (
-                            <></>
-                        )}
+                            {/* Error */}
+                            {error !== "" ? (
+                                <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 font-chatbot font-semibold text-xl text-red-500">
+                                    <Typewriter text={error} id="tux-error" />
+                                </div>
+                            ) : (
+                                <></>
+                            )}
+
+                            <div ref={tuxRef}></div>
+                        </div>
                     </div>
                 </div>
+
                 {/* User side */}
-                <div className="w-full flex justify-end">
-                    <div className="w-full space-y-6">
-                        {/* if options show options */}
-                        {currentQuestion.ansType === "options" ? (
-                            <div className="md:ml-28 w-fit grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-                                {currentQuestion.options.map(
-                                    (option, index) => (
-                                        <button
-                                            key={index}
-                                            className="text-gray-400 min-w-32 max-w-48 p-4 bg-gray-800 rounded-[30px] border border-gray-400 hover:bg-gray-900 text-lg"
-                                            onClick={(e) => {
-                                                setError("");
-                                                setAnswers({
-                                                    ...answers,
-                                                    [currentQuestion.field]:
-                                                        option,
-                                                });
-                                            }}
-                                        >
-                                            {option}
-                                        </button>
-                                    )
-                                )}
-                            </div>
-                        ) : (
-                            <></>
-                        )}
-
-                        {/* Laptop input of users*/}
-                        <div className="hidden md:flex w-full justify-between space-x-4">
-                            {/* Back button */}
-                            <button
-                                onClick={(e) => {
-                                    if (step > 0 && !success) {
-                                        let cur = step - 1;
+                <div className="w-full flex p-4 absolute bottom-2">
+                    <div className="flex justify-between w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4">
+                        {/* Input field */}
+                        {
+                            // If the current question is of type file, then show a file input field
+                            currentQuestion.ansType === "file" ? (
+                                <input
+                                    className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                    type="file"
+                                    id={currentQuestion.field}
+                                    onChange={handleChange}
+                                    onFocus={(e) => {
                                         setError("");
-                                        setStep(cur);
-                                        setCurrentQuestion(questions[cur]);
-                                    }
-                                }}
-                                className="h-16 md:h-24 py-4 px-4 md:px-8 bg-gray-800 rounded-[30px] border border-gray-400 hover:bg-gray-900 "
-                            >
-                                <ArrowLeft
-                                    color="white"
-                                    className="w-6 h-6 md:w-10 md:h-10"
-                                />
-                            </button>
-
-                            {/* Input field */}
-                            {
-                                // If the current question is of type file, then show a file input field
-                                currentQuestion.ansType === "file" ? (
-                                    <input
-                                        className="h-16 md:h-24 w-11/12 bg-gray-800 border border-gray-400 rounded-[35px] outline-none text-xl p-4 text-gray-400"
-                                        type="file"
-                                        id={currentQuestion.field}
-                                        onChange={handleChange}
-                                        onFocus={(e) => {
-                                            setError("");
-                                        }}
-                                    />
-                                ) : (
-                                    <input
-                                        className="h-16 md:h-24 w-11/12 bg-gray-800 border border-gray-400 rounded-[35px] outline-none text-xl p-4 text-gray-400"
-                                        placeholder={"Type here..."}
-                                        disabled={
-                                            currentQuestion.ansType ===
-                                            "options"
-                                        }
-                                        value={answers[currentQuestion.field]}
-                                        id={currentQuestion.field}
-                                        onChange={handleChange}
-                                        onFocus={(e) => {
-                                            setError("");
-                                        }}
-                                        autoComplete="off"
-                                    ></input>
-                                )
-                            }
-
-                            {/* Next button */}
-                            <button
-                                onClick={handleNext}
-                                className="h-16 md:h-24 py-4 px-4 md:px-8 bg-gray-800 rounded-[30px] border border-gray-400 hover:bg-gray-900"
-                            >
-                                <SendHorizonalIcon
-                                    color="white"
-                                    className="w-6 h-6 md:w-10 md:h-10"
-                                />
-                            </button>
-                        </div>
-                        {/* Mobile input  */}
-                        <div className=" md:hidden w-full space-y-3">
-                            {/* Input field */}
-                            {
-                                // If the current question is of type file, then show a file input field
-                                currentQuestion.ansType === "file" ? (
-                                    <input
-                                        className="h-16 md:h-24 w-full bg-gray-800 border border-gray-400 rounded-[15px] outline-none text-xl p-4 text-gray-400"
-                                        type="file"
-                                        id={currentQuestion.field}
-                                        onChange={handleChange}
-                                        onFocus={(e) => {
-                                            setError("");
-                                        }}
-                                    />
-                                ) : (
-                                    <input
-                                        className="h-16 md:h-24 w-full bg-gray-800 border border-gray-400 rounded-[15px] outline-none text-xl p-4 text-gray-400"
-                                        placeholder={"Type here..."}
-                                        disabled={
-                                            currentQuestion.ansType ===
-                                            "options"
-                                        }
-                                        value={
-                                            answers[currentQuestion.field] || ""
-                                        }
-                                        id={currentQuestion.field}
-                                        onChange={handleChange}
-                                        onFocus={(e) => {
-                                            setError("");
-                                        }}
-                                        autoComplete="off"
-                                        type={
-                                            currentQuestion.ansType === "file"
-                                                ? "file"
-                                                : "text"
-                                        }
-                                    ></input>
-                                )
-                            }
-                            <div className="flex justify-between ">
-                                {/* Back Button */}
-                                <button
-                                    onClick={(e) => {
-                                        if (step > 0 && !success) {
-                                            let cur = step - 1;
-                                            setError("");
-                                            setStep(cur);
-                                            setCurrentQuestion(questions[cur]);
-                                        }
                                     }}
-                                    className="h-16 md:h-24 py-4 px-4 md:px-8 bg-gray-800 rounded-[15px] border border-gray-400 hover:bg-gray-900"
-                                >
-                                    <ArrowLeft
-                                        color="white"
-                                        className="w-8 h-8 md:w-10 md:h-10"
-                                    />
-                                </button>
-                                {/* Next Button */}
-                                <button
-                                    onClick={handleNext}
-                                    className="h-16 md:h-24 py-4 px-4 md:px-8 bg-gray-800 rounded-[15px] border border-gray-400 hover:bg-gray-900"
-                                >
-                                    <SendHorizonalIcon
-                                        color="white"
-                                        className="w-8 h-8 md:w-10 md:h-10"
-                                    />
-                                </button>
-                            </div>
-                        </div>
+                                />
+                            ) : currentQuestion.ansType === "options" ? (
+                                <>
+                                    <select
+                                        className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                        id={currentQuestion.field}
+                                        onChange={handleChange}
+                                        onFocus={(e) => {
+                                            setError("");
+                                        }}
+                                    >
+                                        <option value="">
+                                            Select an option
+                                        </option>
+                                        {currentQuestion.options.map(
+                                            (option, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={option}
+                                                    className="bg-gray-800 text-gray-400 p-3"
+                                                >
+                                                    {option}
+                                                </option>
+                                            )
+                                        )}
+                                    </select>
+                                </>
+                            ) : (
+                                <input
+                                    className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                    placeholder={"Type here..."}
+                                    disabled={
+                                        currentQuestion.ansType === "options"
+                                    }
+                                    value={answers[currentQuestion.field]}
+                                    id={currentQuestion.field}
+                                    onChange={handleChange}
+                                    onFocus={(e) => {
+                                        setError("");
+                                    }}
+                                    autoComplete="off"
+                                ></input>
+                            )
+                        }
+
+                        {/* Next button */}
+                        <button
+                            onClick={handleNext}
+                            className=" bg-gray-800 hover:bg-gray-900"
+                        >
+                            <SendHorizonalIcon
+                                color="white"
+                                className="w-6 h-6 md:w-10 md:h-10"
+                            />
+                        </button>
                     </div>
                 </div>
             </div>

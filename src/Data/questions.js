@@ -1,6 +1,6 @@
 export default [
     {
-        title: "Hola Amigo, This is Tuxi. I will guide you through the application process. Are you ready? 🔥",
+        title: "Hola Amigo, This is Tuxi. I will guide you through the application process. Are you ready ? 🔥",
         ansType: "options",
         options: ["Yes"],
         nextStep: [1],
@@ -117,7 +117,7 @@ export default [
                 message: "Please provide a valid quote. (10-100 characters)",
             },
         },
-        field: "favouriteQuote",
+        field: "favoriteQuote",
     },
     {
         title: "Why do you want to join this club? Please explain your reasons.",
@@ -137,7 +137,7 @@ export default [
         field: "whyJoinClub",
     },
     {
-        title: "Do you want to submit your application?",
+        title: "Do you want to submit your application ? (Check all the details before submitting) 🧐",
         ansType: "options",
         options: ["Yes"],
         nextStep: [10],
