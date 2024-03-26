@@ -4,7 +4,7 @@ import { WavyBackground } from "../../ui/wavy-backSRC";
 
 const ChatbotPage = () => {
     return (
-        <div className="w-full min-h-screen md:p-8 p-4 flex justify-center items-center">
+        <div className="w-full min-h-screen md:p-8 p-2 flex justify-center items-center">
             <ChatBot />
         </div>
     );

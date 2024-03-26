@@ -259,6 +259,7 @@ const ChatBot = () => {
     };
     useEffect(() => {
         tuxRef.current.scrollIntoView({ behavior: "smooth" });
+        tuxRef.current.scrollIntoView({ behavior: "smooth" });
     }, [answered, error]);
 
     return (
