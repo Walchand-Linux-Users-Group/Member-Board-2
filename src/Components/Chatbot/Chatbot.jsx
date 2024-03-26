@@ -135,6 +135,7 @@ const ChatBot = () => {
         setError("");
         setStep(cur);
         setCurrentQuestion(questions[cur]);
+        tuxRef.current.scrollIntoView({ behavior: "smooth" });
     };
 
     const makeEditable = (index) => {
@@ -420,7 +421,7 @@ const ChatBot = () => {
                                                     >
                                                         <SendHorizonalIcon
                                                             color="white"
-                                                            className="w-6 h-6  "
+                                                            className="w-6 h-6 "
                                                         ></SendHorizonalIcon>
                                                     </button>
                                                 </div>
@@ -564,7 +565,7 @@ const ChatBot = () => {
                             {/* Next button */}
                             <button
                                 onClick={handleNext}
-                                className=" bg-gray-800 hover:bg-gray-900"
+                                className="px-2 rounded-sm bg-gray-800 hover:bg-gray-900"
                             >
                                 <SendHorizonalIcon
                                     color="white"
