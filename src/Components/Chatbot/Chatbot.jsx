@@ -212,7 +212,10 @@ const ChatBot = () => {
                 console.log(json);
                 setSuccess(true);
 
-        setAnswered([...answered, { question: currentQuestion.title, answer: "Yes" }]);
+                setAnswered([
+                    ...answered,
+                    { question: currentQuestion.title, answer: "Yes" },
+                ]);
                 let cur = step + 1;
                 setError("");
                 setStep(cur);
@@ -282,7 +285,7 @@ const ChatBot = () => {
                                             </div>
                                             <div className="mt-8">
                                                 <div
-                                                    className="w-fit max-w-[50vw] cursor-pointer bg-blue-800 p-3 md:p-6 rounded-[15px] text-white font-chatbot font-semibold text-xl break-words"
+                                                    className="w-fit max-w-[50vw] cursor-pointer bg-[#B557C4] p-3 md:p-6 rounded-[15px] text-white font-chatbot font-semibold text-xl break-words"
                                                     id={`userres${curque.index}`}
                                                     onClick={() =>
                                                         makeEditable(
@@ -431,7 +434,7 @@ const ChatBot = () => {
                 <div className="w-full flex p-4 absolute bottom-2">
                     {isLoading ? (
                         <div className="flex w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4 justify-center space-x-3">
-                           <div className="w-16 h-16 border-b-2 border-indigo-500 rounded-full animate-spin"></div>
+                            <div className="w-16 h-16 border-b-2 border-indigo-500 rounded-full animate-spin"></div>
                         </div>
                     ) : (
                         <div className="flex justify-between w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4">
