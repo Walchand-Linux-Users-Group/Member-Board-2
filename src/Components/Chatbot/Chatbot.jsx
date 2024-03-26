@@ -5,8 +5,6 @@ import questions from "../../Data/questions";
 import { SendHorizonalIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Typewriter from "../Typewriter/Typewriter";
-import Loader from "../Loader/Loader";
-
 const ChatBot = () => {
     const tuxRef = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -193,7 +191,6 @@ const ChatBot = () => {
 
     // Function to handle apply button click
     const handleApply = async () => {
-        setAnswered([...answered, { question: currentQuestion.title, answer: "Yes" }]);
         setIsLoading(true);
         const url = "https://wlug-mb2-backend.onrender.com/api/user/apply";
         const formData = new FormData();
@@ -214,6 +211,8 @@ const ChatBot = () => {
             if (res.ok) {
                 console.log(json);
                 setSuccess(true);
+
+        setAnswered([...answered, { question: currentQuestion.title, answer: "Yes" }]);
                 let cur = step + 1;
                 setError("");
                 setStep(cur);
