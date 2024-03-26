@@ -8,3 +8,9 @@
   color: white;
 }
 
+@media (max-width: 768px) {
+  .motto{
+    font-size: smaller;
+  }
+}
+

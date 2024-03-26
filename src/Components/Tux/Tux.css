@@ -1,6 +1,11 @@
+.tuxcss {
+  height: auto ;
+  max-width: 440px;
+  min-width: 440px;
+}
 
-.tuxcss{
-    height: 60vh !important;
-    max-width: 440px;
-    min-width: 440px;
+@media (max-width: 768px) {
+  .tuxcss {
+    height: 2vh;
+  }
 }

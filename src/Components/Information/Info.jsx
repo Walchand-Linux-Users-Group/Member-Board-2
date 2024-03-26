@@ -7,7 +7,7 @@ export default function Info(){
         <div className="infocon">
             
 
-            <p className="infol"> Member Board 2 drive </p>
+            <p className="infol text-1xl md:text-3xl font-bold dark:text-white text-center"> Member Board Drive 2</p>
             {/* <p className="ml
             text-1xl md:text-3xl font-bold ">Last Chance to be a part of this family</p>
             <p className="sl">Apply now</p> */}
