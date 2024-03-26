@@ -8,6 +8,13 @@
     .infocon {
         width: 100%; /* Set to full width on smaller screens */
     }
+    .typewriter-container{
+        display: none;
+    }
+    .forphone{
+        color: white;
+        font-weight: 600;
+    }
 }
 .typewriter-container {
     max-width: 100%; /* Adjust as needed */
@@ -20,6 +27,7 @@
     font-size: large;
     text-align: center;
     white-space: normal; /* Allow text to wrap */
+    margin: 4px;
 }
 
 .ml {

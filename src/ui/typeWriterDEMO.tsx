@@ -11,10 +11,6 @@ export function TypewriterEffectSmoothDemo() {
     { text: "of" },
     { text: "this" },
     { text: "family" },
-    {
-      text: "Apply Now",
-      className: "text-blue-500 dark:text-blue-500",
-    },
   ];
   return (
 

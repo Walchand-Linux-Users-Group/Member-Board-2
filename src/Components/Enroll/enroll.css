@@ -36,6 +36,14 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+@media (max-width:768px) {
+  .links {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+  }
+}
 
 /* .buttoncss:hover {
   background-color: rgb(14, 39, 230);

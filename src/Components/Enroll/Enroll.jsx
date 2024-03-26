@@ -18,7 +18,7 @@ export default function Enroll({ onClick }) {
           <a href="https://www.instagram.com/wcewlug/" target="_blank" rel="noopener noreferrer">
             <FaInstagram  size={"30px"}   /> {/* Replace text with Instagram icon */}
           </a>
-          <a href="https://www.linkedin.com/in/wlug-club-3a9236117/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/company/wlug-club/mycompany/" target="_blank" rel="noopener noreferrer">
             <FaLinkedin  size={"30px"}  /> {/* Replace text with LinkedIn icon */}
           </a>
           <a href="https://discord.wcewlug.org/join" target="_blank" rel="noopener noreferrer">

@@ -19,7 +19,7 @@ const HomePage = () => {
             <img className="logo" src="/Logo_White.png" alt="Logo" />
           </a>
         </div>
-        <div className="maincon flex-grow">
+        <div className="maincon">
           <div className="seccon">
             <Title />
             <Info />

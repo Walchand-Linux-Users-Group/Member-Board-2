@@ -6,10 +6,9 @@ export default function Info() {
     <>
       <div
         className="infocon container mx-auto p-4 m-4 flex flex-col
-         my-20 
       justify-center items-center "
       >
-        <p className="infol text-4xl md:text-6xl font-bold dark:text-white text-center">
+        <p className="infol text-4xl md:text-5xl font-bold dark:text-white text-center">
           {" "}
           Member Board Drive 2
         </p>
@@ -27,12 +26,15 @@ export default function Info() {
             */}
         <p className="infopara font-bold px-2 ">
           {" "}
-          Join our Linux community. Experience Open Source. Join now!
+          Join our Linux community. Experience Open Source.
         </p>
         <div className="text-center text-xl mx-auto">
           <div className="typewriter-container p-4 mx-auto">
             <TypewriterEffectSmoothDemo />
           </div>
+        </div>
+        <div className="forphone">
+          <p>Last chance to be a part of this Family</p>
         </div>
       </div>
     </>
