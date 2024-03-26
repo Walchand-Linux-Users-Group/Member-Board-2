@@ -5,10 +5,9 @@ export default function Info(){
     return (
         <>
         <div className="infocon">
-            <p className="motto dark text-1xl font-bold dark:text-white text-center"
-            >COMMUNITY | KNOWLEDGE | SHARE</p>
-
             
+
+            <p className="infol"> Member Board 2 drive </p>
             {/* <p className="ml
             text-1xl md:text-3xl font-bold ">Last Chance to be a part of this family</p>
             <p className="sl">Apply now</p> */}

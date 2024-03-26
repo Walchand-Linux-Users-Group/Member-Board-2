@@ -8,7 +8,7 @@ import { AuroraBackground } from "./ui/aurora-background";
 
 function App() {
     return (
-        <div className=" dark">
+        <div className=" dark flex flex-row">
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage/>}></Route>
@@ -16,7 +16,8 @@ function App() {
                 </Routes>
             </BrowserRouter>
             <div className="Back">
-                <AuroraBackground/>
+                {/* <AuroraBackground/> */}
+                <WavyBackground/>
             </div>
         </div>
     );

@@ -4,7 +4,7 @@ import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("/tux.glb");
+  const { nodes, materials } = useGLTF("/tux-transformed.glb");
 
   return (
     <group {...props} dispose={null} scale={0.05}>
@@ -32,7 +32,7 @@ function Model(props) {
   );
 }
 
-useGLTF.preload("/tux.glb");
+useGLTF.preload("/tux-transformed.glb");
 
 
 
@@ -46,7 +46,7 @@ export default function Tux() {
           <ambientLight />
           <OrbitControls enableZoom={false} autoRotate={true} autoRotateSpeed={2}/>
           <Suspense fallback={null}>
-            <Model position={[0, -1.5, 0]} />
+            <Model position={[0, -2, 0]} />
           </Suspense>
           <Environment preset="sunset" />
         </Canvas>
