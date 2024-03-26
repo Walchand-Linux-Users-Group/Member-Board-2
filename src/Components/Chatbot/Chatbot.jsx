@@ -445,7 +445,7 @@ const ChatBot = () => {
                                 className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-xl"
                                 id="tux-conv"
                             >
-                                <Typewriter text={currentQuestion.title} />
+                                <Typewriter text={currentQuestion.title} tuxRef={tuxRef} />
                             </div>
                             {/* Error */}
                             {error !== "" ? (

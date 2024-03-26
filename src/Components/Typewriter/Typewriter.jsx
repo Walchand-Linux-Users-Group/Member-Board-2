@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './typewriter.css'; // Import CSS file for styling
 
-const Typewriter = ({ text }) => {
+const Typewriter = ({ text ,tuxRef}) => {
   const [displayText, setDisplayText] = useState('');
 
   useEffect(() => {
