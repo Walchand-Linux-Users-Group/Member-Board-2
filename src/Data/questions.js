@@ -25,7 +25,7 @@ export default [
         field: "fullName",
     },
     {
-        title: "If you want to edit anything you can click on that chat bubble and edit it.",
+        title: "If you wish to make edits, simply click on the chat bubble containing the text you want to modify.",
         ansType: "options",
         options: ["Ok"],
         nextStep: [1],
