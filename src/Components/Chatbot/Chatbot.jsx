@@ -259,8 +259,14 @@ const ChatBot = () => {
         setAnswered(temp);
     };
     useEffect(() => {
-        tuxRef.current.scrollIntoView({ behavior: "smooth" });
-    }, [answered, error,currentQuestion]);
+        if (window.innerWidth <= 500) {
+            setTimeout(() => {
+                tuxRef.current.scrollIntoView({ behavior: "smooth" });
+            }, 500);
+        } else {
+            tuxRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [answered, error, currentQuestion]);
 
     return (
         <div className="w-full flex justify-center items-center">
@@ -330,7 +336,9 @@ const ChatBot = () => {
                                                             trigger={
                                                                 <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-2 text-gray-400 cursor-pointer ">
                                                                     {
-                                                                        answered[ind].answer
+                                                                        answered[
+                                                                            ind
+                                                                        ].answer
                                                                     }
                                                                 </div>
                                                             }
@@ -371,7 +379,8 @@ const ChatBot = () => {
                                                                                                 answered;
                                                                                             temp[
                                                                                                 ind
-                                                                                            ].answer = option;
+                                                                                            ].answer =
+                                                                                                option;
                                                                                             setAnswered(
                                                                                                 temp
                                                                                             );
@@ -445,7 +454,7 @@ const ChatBot = () => {
                                 className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-xl"
                                 id="tux-conv"
                             >
-                                <Typewriter text={currentQuestion.title} tuxRef={tuxRef} />
+                                <Typewriter text={currentQuestion.title} />
                             </div>
                             {/* Error */}
                             {error !== "" ? (

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './typewriter.css'; // Import CSS file for styling
 
-const Typewriter = ({ text ,tuxRef}) => {
+const Typewriter = ({ text}) => {
   const [displayText, setDisplayText] = useState('');
 
   useEffect(() => {
@@ -14,7 +14,6 @@ const Typewriter = ({ text ,tuxRef}) => {
         setDisplayText(text.substring(0, currentIndex));
         currentIndex++;
       } else {
-        tuxRef.current.scrollIntoView({ behavior: "smooth" });
         clearInterval(intervalId);
       }
     }, 70); // Adjust typing speed here (milliseconds)
