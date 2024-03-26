@@ -431,10 +431,9 @@ const ChatBot = () => {
                 {/* User side */}
                 <div className="w-full flex p-4 absolute bottom-2">
                     {isLoading ? (
-                        <>
-                        <div className="flex w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4 justify-center"></div>
-                            <Loader />
-                        </>
+                        <div className="flex w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4 justify-center">
+                            <Loader /> Submitting ....
+                        </div>
                     ) : (
                         <div className="flex justify-between w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4">
                             {/* Input field */}
