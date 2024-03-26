@@ -25,6 +25,14 @@ export default [
         field: "fullName",
     },
     {
+        title: "If you want to edit anything you can click on that chat bubble and edit it.",
+        ansType: "options",
+        options: ["Ok"],
+        nextStep: [1],
+        constraints: [],
+        field: "tip",
+    },
+    {
         title: "Which branch are you from?",
         ansType: "options",
         options: [
@@ -120,7 +128,7 @@ export default [
         field: "favoriteQuote",
     },
     {
-        title: "Why do you want to join this club? Please explain your reasons.",
+        title: "Why do you want to join this club?",
         ansType: "text",
         nextStep: 7,
         constraints: {
