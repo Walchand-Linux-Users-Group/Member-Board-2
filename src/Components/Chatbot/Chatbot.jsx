@@ -6,29 +6,28 @@ import { Radio, SendHorizonalIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Typewriter from "../Typewriter/Typewriter";
 import Popup from "reactjs-popup";
+
 const ChatBot = () => {
+    // For scrolling on every new question
     const tuxRef = useRef(null);
-    const [isLoading, setIsLoading] = useState(false);
+
     // For navigation
     const navigate = useNavigate();
 
-    const [answered, setAnswered] = useState([]);
-
-    // To Home
-    const toHome = () => {
-        navigate("/");
-    };
-
     // State variables
-    const [step, setStep] = useState(0);
-    const [currentQuestion, setCurrentQuestion] = useState(questions[step]);
-    const [answers, setAnswers] = useState({});
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState(false);
+    const [step, setStep] = useState(0); // Current question number
+    const [currentQuestion, setCurrentQuestion] = useState(questions[step]); // Current question
+    const [answers, setAnswers] = useState({}); // Answers given  by user
+    const [error, setError] = useState(""); // Error message
+    const [answered, setAnswered] = useState([]); // To keep track of answered questions and their responses
+    const [isLoading, setIsLoading] = useState(false); // To show loading spinner
+    const [success, setSuccess] = useState(false); // To know if the application was successful
 
-    // Function to handle change in input fields
+    // Function to handle change in input field value (main)
     const handleChange = (e) => {
         setError("");
+
+        // Handling file input
         if (currentQuestion.ansType === "file") {
             setAnswers({
                 ...answers,
@@ -37,8 +36,55 @@ const ChatBot = () => {
             console.log(answers);
             return;
         }
+
+        // Handling text input
         setAnswers({ ...answers, [currentQuestion.field]: e.target.value });
-        console.log(answers);
+    };
+
+    const validate = (currentQuestion, response) => {
+        // If the current question is of type options, then check for valid option
+        if (currentQuestion.ansType === "options") {
+            if (!currentQuestion.options.includes(response)) {
+                setError("Please select a valid option.");
+                return false;
+            }
+        }
+
+        // If the current question is of type text or file, then check for constraints
+        if (
+            currentQuestion.ansType === "text" ||
+            currentQuestion.ansType === "file"
+        ) {
+            if (currentQuestion.constraints) {
+                if (currentQuestion.constraints.required) {
+                    if (response === "" || !response) {
+                        setError(currentQuestion.constraints.required.message);
+                        return false;
+                    }
+                }
+                if (currentQuestion.constraints.pattern) {
+                    if (
+                        !currentQuestion.constraints.pattern.value.test(
+                            response
+                        )
+                    ) {
+                        setError(currentQuestion.constraints.pattern.message);
+                        return false;
+                    }
+                }
+                if (currentQuestion.constraints.length) {
+                    if (
+                        response.length <
+                            currentQuestion.constraints.length.min ||
+                        response.length > currentQuestion.constraints.length.max
+                    ) {
+                        setError(currentQuestion.constraints.length.message);
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     };
 
     // Function to handle next button click
@@ -54,67 +100,12 @@ const ChatBot = () => {
             navigate("/");
         }
 
-        // If the current question is of type options, then check for valid option
-        if (currentQuestion.ansType === "options") {
-            if (
-                !currentQuestion.options.includes(
-                    answers[currentQuestion.field]
-                )
-            ) {
-                setError("Please select a valid option.");
-
-                return;
-            }
+        // validate the response
+        if (!validate(currentQuestion, answers[currentQuestion.field])) {
+            return;
         }
 
-        // If the current question is of type text or file, then check for constraints
-        if (
-            currentQuestion.ansType === "text" ||
-            currentQuestion.ansType === "file"
-        ) {
-            if(currentQuestion.ansType==='file'){
-                if(answers[currentQuestion.field].size > 1 * 1000 * 1024){
-                    setError("File size should be less than 1MB");
-                    return;
-                }
-            }
-            if (currentQuestion.constraints) {
-                if (currentQuestion.constraints.required) {
-                    if (
-                        answers[currentQuestion.field] === "" ||
-                        !answers[currentQuestion.field]
-                    ) {
-                        setError(currentQuestion.constraints.required.message);
-
-                        return;
-                    }
-                }
-                if (currentQuestion.constraints.pattern) {
-                    if (
-                        !currentQuestion.constraints.pattern.value.test(
-                            document.getElementById(currentQuestion.field).value.trim()
-                        )
-                    ) {
-                        setError(currentQuestion.constraints.pattern.message);
-
-                        return;
-                    }
-                }
-                if (currentQuestion.constraints.length) {
-                    if (
-                        document.getElementById(currentQuestion.field).value
-                            .length < currentQuestion.constraints.length.min ||
-                        document.getElementById(currentQuestion.field).value
-                            .length > currentQuestion.constraints.length.max
-                    ) {
-                        setError(currentQuestion.constraints.length.message);
-
-                        return;
-                    }
-                }
-            }
-        }
-
+        // Create an object to store the current question and its response
         let curans = {
             question: currentQuestion.title,
             answer:
@@ -128,7 +119,6 @@ const ChatBot = () => {
         };
 
         // If the current question is of type text or file, then move to next question
-
         if (
             currentQuestion.ansType === "text" ||
             currentQuestion.ansType === "file"
@@ -144,10 +134,12 @@ const ChatBot = () => {
         tuxRef.current.scrollIntoView({ behavior: "smooth" });
     };
 
+    // Function to make a response editable
     const makeEditable = (index) => {
         if (
             answered[index].field === "start" ||
             answered[index].field === "submit" ||
+            answered[index].field === "tip" ||
             success ||
             step === questions.length - 1 ||
             isLoading
@@ -161,51 +153,32 @@ const ChatBot = () => {
         usered.classList.toggle("flex");
     };
 
+    // Function to handle edit submit button click
     const handleEditSubmit = (index) => {
-        if (answered[index].constraints) {
-            if (answered[index].constraints.pattern) {
-                if (
-                    !answered[index].constraints.pattern.value.test(
-                        answered[index].answer
-                    )
-                ) {
-                    setError(answered[index].constraints.pattern.message);
-                    return;
-                }
-            }
-            if (answered[index].constraints.length) {
-                if (
-                    answered[index].answer.length <
-                        answered[index].constraints.length.min ||
-                    answered[index].answer.length >
-                        answered[index].constraints.length.max
-                ) {
-                    setError(answered[index].constraints.length.message);
-                    return;
-                }
-            }
-            if (answered[index].constraints.required) {
-                if (answered[index].answer === "" || !answered[index].answer) {
-                    setError(answered[index].constraints.required.message);
-                    return;
-                }
-            }
+        // Validate the response
+        const validation = validate(
+            questions[answered[index].index],
+            answered[index].answer
+        );
+
+        if (!validation) {
+            return;
         }
-        const userres = document.getElementById(`userres${index}`);
-        userres.classList.toggle("hidden");
 
-        const usered = document.getElementById(`usered${index}`);
-        usered.classList.toggle("hidden");
-        usered.classList.toggle("flex");
-
+        makeEditable(index);
         console.log(answers);
         console.log(answered);
     };
 
     // Function to handle apply button click
     const handleApply = async () => {
+        // set loading to true
         setIsLoading(true);
+
+        // url to make a POST request
         const url = "https://wlug-mb2-backend.onrender.com/api/user/apply";
+
+        // Create a formData object
         const formData = new FormData();
 
         // Append all answers to formData
@@ -242,6 +215,7 @@ const ChatBot = () => {
         setIsLoading(false);
     };
 
+    // Function to handle edit of response (text)
     const handleEdit1 = (e, ind) => {
         const editQuestion = answered[ind];
         setAnswers({
@@ -253,13 +227,10 @@ const ChatBot = () => {
         setAnswered(temp);
     };
 
+    // Function to handle edit of response (file)
     const handleEdit2 = (e, ind) => {
         const editQuestion = answered[ind];
         console.log(e.target.files[0]);
-        if(e.target.files[0].size > 1 * 1000 * 1024){
-            setError("File size should be less than 1MB");
-            return;
-        }
         setAnswers({
             ...answers,
             [editQuestion.field]: e.target.files[0],
@@ -268,7 +239,10 @@ const ChatBot = () => {
         temp[ind].answer = e.target.files[0].name;
         setAnswered(temp);
     };
+
+    // useEffect to scroll to the bottom of the chat on every new question
     useEffect(() => {
+        // waiting till keyboard is not closed on mobile
         if (window.innerWidth <= 500) {
             setTimeout(() => {
                 tuxRef.current.scrollIntoView({ behavior: "smooth" });
@@ -286,6 +260,7 @@ const ChatBot = () => {
                 className="relative lg:w-4/5 w-11/12 h-[86vh] md:h-[90vh] bg-gray-900 rounded-lg bg-opacity-60"
             >
                 <div className="overflow-y-scroll p-6 custom-scrollbar h-[70vh]">
+                    {/* Previous or answered questions */}
                     {answered.length > 0 &&
                         answered.map((curque, ind) => {
                             return (
@@ -450,6 +425,7 @@ const ChatBot = () => {
                             );
                         })}
 
+                    {/* Current question */}
                     {/* Tux Side */}
                     <div className="w-full space-y-1 mt-4">
                         {/* Tux Image */}
@@ -480,6 +456,7 @@ const ChatBot = () => {
                     </div>
                 </div>
 
+                {/* Current question */}
                 {/* User side */}
                 <div className="w-full flex p-4 absolute bottom-2">
                     {isLoading ? (
