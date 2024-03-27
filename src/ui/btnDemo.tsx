@@ -8,7 +8,7 @@ export function MovingBorderDemo(props) {
       <Button
         onClick={props.onClick}
         borderRadius="5rem"
-        className=" hover:bg-gray-400 && hover:text-blue-800 transition-all duration-300 ease-in-out bg-white text-1xl w-full font-bold cursor-pointer  text-black p-2  dark:border-slate-800 dark:to-blue-500 border-4"
+        className=" hover:bg-gray-600 && hover:text-white transition-all duration-300 ease-in-out bg-white text-1xl w-full font-bold cursor-pointer  text-black p-2  dark:border-slate-800 dark:to-blue-500 border-4"
       >
         {props.text}
       </Button>

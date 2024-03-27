@@ -8,7 +8,7 @@ import "./home.css";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="over">
       <div className="h-screen w-screen flex flex-col">
         <div className="center">
           <a
