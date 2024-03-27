@@ -475,7 +475,7 @@ const ChatBot = () => {
 
                 {/* Current question */}
                 {/* User side */}
-                <div className="w-full flex p-4 absolute bottom-2">
+                <div className="w-full flex py-2 px-4 md:px-4 md:py-4 absolute bottom-2">
                     {isLoading ? (
                         <div className="flex w-full border bg-gray-800 border-gray-500 rounded-[15px] p-2 px-4 justify-center space-x-3">
                             <div className="w-16 h-16 border-b-2 border-indigo-500 rounded-full animate-spin"></div>
@@ -487,7 +487,7 @@ const ChatBot = () => {
                                 // If the current question is of type file, then show a file input field
                                 currentQuestion.ansType === "file" ? (
                                     <input
-                                        className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-lg p-4 text-gray-400"
+                                        className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-lg py-2 px-4 md:px-4 md:py-4 text-gray-400"
                                         type="file"
                                         id={currentQuestion.field}
                                         onChange={handleChange}
@@ -504,7 +504,7 @@ const ChatBot = () => {
                                     <>
                                         <Popup
                                             trigger={
-                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg p-4 text-gray-400 cursor-pointer ">
+                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg py-2 px-4 md:px-4 md:py-4 text-gray-400 cursor-pointer ">
                                                     {answers[
                                                         currentQuestion.field
                                                     ] !== "" &&
@@ -557,7 +557,7 @@ const ChatBot = () => {
                                     </>
                                 ) : (
                                     <input
-                                        className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg p-4 text-gray-400"
+                                        className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg py-2 px-4 md:px-4 md:py-4 text-gray-400"
                                         placeholder={"Type here..."}
                                         disabled={
                                             currentQuestion.ansType ===
