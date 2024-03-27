@@ -7,10 +7,13 @@
   font-size: 50px;
   color: white;
 }
-
+.motto{
+  margin-top: 5px;
+}
 @media (max-width: 768px) {
   .motto{
     font-size: x-small;
+    margin: 0;
   }
 }
 
