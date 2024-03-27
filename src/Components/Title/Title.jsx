@@ -10,7 +10,7 @@ export default function Title() {
         <h1 className="title2 text-3xl md:text-5xl font-bold dark:text-white text-center">
           Users' Group
         </h1>
-        <p className="motto dark text-1xl font-bold dark:text-white text-center mt-3"
+        <p className="motto dark text-1xl font-bold dark:text-white text-center"
             >COMMUNITY | KNOWLEDGE | SHARE</p>
       </div>
     </>

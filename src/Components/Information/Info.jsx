@@ -8,12 +8,12 @@ export default function Info() {
         className="infocon container mx-auto flex flex-col
       justify-center items-center "
       >
-        <p className="infol text-4xl md:text-5xl font-bold dark:text-white text-center mt-2">
+        <p className="infol text-4xl md:text-5xl font-bold dark:text-white text-center mt-4">
           Member Board Drive 2
         </p>
         <p className="infopara">
           Prepare to join a vibrant community of Linux enthusiasts and immerse
-          yourself in the dynamic world of Open Source
+          yourself in the dynamic world of Open Source.
         </p>
         <div className="text-center text-xl mx-auto">
           <div className="typewriter-container mx-auto">
@@ -21,7 +21,7 @@ export default function Info() {
           </div>
         </div>
         <div className="forphone">
-          <p>Last chance to be a part of this Family</p>
+          <p>Last chance to be a part of this Family!</p>
         </div>
       </div>
     </>

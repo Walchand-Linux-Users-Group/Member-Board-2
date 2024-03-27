@@ -4,7 +4,7 @@ import { Button } from "../ui/btnBorderSrc";
 
 export function MovingBorderDemo(props) {
   return (
-    <div className="mt-[-20px] p-[10px] ">
+    <div className="p-[10px] ">
       <Button
         onClick={props.onClick}
         borderRadius="5rem"
