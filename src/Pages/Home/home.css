@@ -1,7 +1,6 @@
 .maincon {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
   justify-content: space-evenly;
   position: relative;
   z-index: 10;
@@ -30,8 +29,9 @@
   height: 150px;
   z-index: 100;
 }
-.over{
-  overflow: hidden;
+.maincon:nth-child(2){
+  display: flex;
+  flex-grow: 1;
 }
 @media (max-width: 768px) {
   .maincon {
@@ -61,8 +61,5 @@
   .logo {
     height: 100px;
     width: auto;
-  }
-  .over{
-    overflow: hidden;
   }
 }

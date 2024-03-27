@@ -1,44 +1,56 @@
 .infocon {
-    text-align: center;
-    color: white;
-    width: 50%; /* Adjust as needed */
+  text-align: center;
+  color: white;
+  width: 50%; /* Adjust as needed */
 }
-.forphone{
-    display: none;
+.forphone {
+  display: none;
 }
 @media (max-width: 768px) {
-    .infocon {
-        width: 100%; /* Set to full width on smaller screens */
-    }
-    .typewriter-container{
-        display: none;
-    }
-    .forphone{
-        display: block;
-        color: white;
-        font-weight: 600;
-    }
+  .infocon {
+    width: 100%; /* Set to full width on smaller screens */
+  }
+  .typewriter-container {
+    display: none;
+  }
+  .forphone {
+    display: block;
+    color: white;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .infopara {
+    text-align: center;
+    white-space: normal;
+    margin: 60px;
+    
+    font-weight: 400;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
 }
 .typewriter-container {
-    max-width: 100%; /* Adjust as needed */
-    overflow: hidden; /* Prevent content from overflowing */
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-align: center; /* Center the content */
-  }
-  
+  max-width: 100%; /* Adjust as needed */
+  overflow: hidden; /* Prevent content from overflowing */
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-align: center;
+}
+
 .infopara {
-    font-size: large;
-    text-align: center;
-    white-space: normal; /* Allow text to wrap */
-    margin: 4px;
+  font-size: medium;
+  text-align: center;
+  margin: 4px;
+  margin-right: 10px;
+  margin-left: 10px;
+  max-width: 530px;
 }
 
 .ml {
-    margin-top: 2.5em;
-    font-size: 24px;
+  margin-top: 2.5em;
+  font-size: 24px;
 }
 
 .sl {
-    font-size: 20px;
-    margin-bottom: 2em;
+  font-size: 20px;
+  margin-bottom: 2em;
 }

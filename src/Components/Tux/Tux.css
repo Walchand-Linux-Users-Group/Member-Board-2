@@ -1,12 +1,12 @@
 .tuxcss {
-  height: auto ;
-  max-width: 440px;
-  min-width: 340px;
+  height: 100% ;
+  width: 40%;
 }
 
 @media (max-width: 768px) {
   .tuxcss {
     height: 100%;
     max-width: none;
+    width: auto;
   }
 }
