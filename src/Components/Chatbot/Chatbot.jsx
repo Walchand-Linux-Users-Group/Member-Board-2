@@ -271,7 +271,7 @@ const ChatBot = () => {
                                         </div>
 
                                         <div className="ml-8 space-y-4">
-                                            <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-xl">
+                                            <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-lg">
                                                 {curque.question}
                                             </div>
                                         </div>
@@ -283,7 +283,7 @@ const ChatBot = () => {
                                             </div>
                                             <div className="mt-8">
                                                 <div
-                                                    className="w-fit max-w-[50vw] cursor-pointer bg-[#B557C4] p-3 md:p-6 rounded-[15px] text-white font-chatbot font-semibold text-xl break-words"
+                                                    className="w-fit max-w-[50vw] cursor-pointer bg-[#B557C4] p-3 md:p-6 rounded-[15px] text-white font-chatbot font-semibold text-lg break-words"
                                                     id={`userres${curque.index}`}
                                                     onClick={() =>
                                                         makeEditable(
@@ -300,7 +300,7 @@ const ChatBot = () => {
                                                 >
                                                     {curque.type === "text" ? (
                                                         <input
-                                                            className=" w-full rounded-[15px] bg-gray-800 outline-none text-xl p-2 text-gray-400"
+                                                            className=" w-full rounded-[15px] bg-gray-800 outline-none text-lg p-2 text-gray-400"
                                                             placeholder={
                                                                 "Type here..."
                                                             }
@@ -319,7 +319,7 @@ const ChatBot = () => {
                                                       "options" ? (
                                                         <Popup
                                                             trigger={
-                                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-2 text-gray-400 cursor-pointer ">
+                                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg p-2 text-gray-400 cursor-pointer ">
                                                                     {
                                                                         answered[
                                                                             ind
@@ -332,7 +332,7 @@ const ChatBot = () => {
                                                             {(close) => (
                                                                 <div className="bg-gray-800 rounded-lg shadow-lg min-w-[300px] max-h-[300px] overflow-y-auto custom-scrollbar">
                                                                     <div className="">
-                                                                        <h1 className="text-xl font-semibold text-gray-400 p-4 border-b border-gray-400">
+                                                                        <h1 className="text-lg font-semibold text-gray-400 p-4 border-b border-gray-400">
                                                                             Select
                                                                             an
                                                                             option
@@ -385,7 +385,7 @@ const ChatBot = () => {
                                                         </Popup>
                                                     ) : (
                                                         <input
-                                                            className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-xl p-2 text-gray-400"
+                                                            className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-lg p-2 text-gray-400"
                                                             type="file"
                                                             onChange={(e) =>
                                                                 handleEdit2(
@@ -437,14 +437,14 @@ const ChatBot = () => {
                         <div className="ml-8 space-y-4">
                             {/* Message */}
                             <div
-                                className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-xl"
+                                className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-lg"
                                 id="tux-conv"
                             >
                                 <Typewriter text={currentQuestion.title} />
                             </div>
                             {/* Error */}
                             {error !== "" ? (
-                                <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 font-chatbot font-semibold text-xl text-red-500">
+                                <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 font-chatbot font-semibold text-lg text-red-500">
                                     <Typewriter text={error} id="tux-error" />
                                 </div>
                             ) : (
@@ -470,7 +470,7 @@ const ChatBot = () => {
                                 // If the current question is of type file, then show a file input field
                                 currentQuestion.ansType === "file" ? (
                                     <input
-                                        className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                        className="w-11/12 rounded-[15px] bg-gray-800 outline-none text-lg p-4 text-gray-400"
                                         type="file"
                                         id={currentQuestion.field}
                                         onChange={handleChange}
@@ -487,7 +487,7 @@ const ChatBot = () => {
                                     <>
                                         <Popup
                                             trigger={
-                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400 cursor-pointer ">
+                                                <div className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg p-4 text-gray-400 cursor-pointer ">
                                                     {answers[
                                                         currentQuestion.field
                                                     ] !== "" &&
@@ -506,7 +506,7 @@ const ChatBot = () => {
                                             {(close) => (
                                                 <div className="bg-gray-800 rounded-lg shadow-lg min-w-[300px] max-h-[300px] overflow-y-auto custom-scrollbar">
                                                     <div className="">
-                                                        <h1 className="text-xl font-semibold text-gray-400 p-4 border-b border-gray-400">
+                                                        <h1 className="text-lg font-semibold text-gray-400 p-4 border-b border-gray-400">
                                                             Select an option
                                                         </h1>
                                                         <div className="space-y-4">
@@ -540,7 +540,7 @@ const ChatBot = () => {
                                     </>
                                 ) : (
                                     <input
-                                        className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-xl p-4 text-gray-400"
+                                        className="rounded-[15px] w-11/12 bg-gray-800 outline-none text-lg p-4 text-gray-400"
                                         placeholder={"Type here..."}
                                         disabled={
                                             currentQuestion.ansType ===
