@@ -3,7 +3,9 @@
     color: white;
     width: 50%; /* Adjust as needed */
 }
-
+.forphone{
+    display: none;
+}
 @media (max-width: 768px) {
     .infocon {
         width: 100%; /* Set to full width on smaller screens */
@@ -12,6 +14,7 @@
         display: none;
     }
     .forphone{
+        display: block;
         color: white;
         font-weight: 600;
     }

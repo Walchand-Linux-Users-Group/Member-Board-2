@@ -72,6 +72,12 @@ const ChatBot = () => {
             currentQuestion.ansType === "text" ||
             currentQuestion.ansType === "file"
         ) {
+            if(currentQuestion.ansType==='file'){
+                if(answers[currentQuestion.field].size > 1 * 1000 * 1024){
+                    setError("File size should be less than 1MB");
+                    return;
+                }
+            }
             if (currentQuestion.constraints) {
                 if (currentQuestion.constraints.required) {
                     if (
@@ -250,6 +256,10 @@ const ChatBot = () => {
     const handleEdit2 = (e, ind) => {
         const editQuestion = answered[ind];
         console.log(e.target.files[0]);
+        if(e.target.files[0].size > 1 * 1000 * 1024){
+            setError("File size should be less than 1MB");
+            return;
+        }
         setAnswers({
             ...answers,
             [editQuestion.field]: e.target.files[0],
@@ -415,8 +425,8 @@ const ChatBot = () => {
                                                                 questions[ind]
                                                                     .field ===
                                                                 "photo"
-                                                                    ? "image/*"
-                                                                    : ".pdf"
+                                                                    ? "image/x-png,image/png,image/jpeg,image/jpg"
+                                                                    : "application/pdf"
                                                             }
                                                         />
                                                     )}
