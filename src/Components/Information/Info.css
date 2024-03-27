@@ -37,9 +37,9 @@
 }
 
 .infopara {
-  font-size: medium;
+  font-size: large;
   text-align: center;
-  margin: 4px;
+  margin-top: 10px;
   margin-right: 10px;
   margin-left: 10px;
   max-width: 530px;
