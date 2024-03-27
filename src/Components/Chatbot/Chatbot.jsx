@@ -62,7 +62,7 @@ const ChatBot = () => {
                         response.type !== "image/jpg"
                     ) {
                         setError(
-                            "Please upload a valid image file. (.png, .jpg, .jpeg)"
+                            "Please upload a valid image file. (.png /.jpg /.jpeg)"
                         );
                         return false;
                     }
