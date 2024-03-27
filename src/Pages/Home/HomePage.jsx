@@ -5,10 +5,12 @@ import Enroll from "../../Components/Enroll/Enroll";
 import Info from "../../Components/Information/Info";
 import Tux from "../../Components/Tux/Tux";
 import "./home.css";
+import Timer from "../../Components/Timer/Timer";
+import BasicType from "../../Components/Typewriter/BasicTypewriter";
 
 const HomePage = () => {
   return (
-    <div className="over">
+    <div>
       <div className="h-screen w-screen flex flex-col">
         <div className="center">
           <a
@@ -23,6 +25,8 @@ const HomePage = () => {
           <div className="seccon">
             <Title />
             <Info />
+            <BasicType/>
+            <Timer />
             <Enroll />
           </div>
           <Tux />

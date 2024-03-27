@@ -3,21 +3,13 @@
   color: white;
   width: 50%; /* Adjust as needed */
 }
-.forphone {
-  display: none;
-}
+
 @media (max-width: 768px) {
   .infocon {
     width: 100%; /* Set to full width on smaller screens */
   }
   .typewriter-container {
     display: none;
-  }
-  .forphone {
-    display: block;
-    color: white;
-    font-weight: 400;
-    margin-bottom: 20px;
   }
   .infopara {
     text-align: center;
@@ -28,6 +20,7 @@
     align-content: center;
   }
 }
+
 .typewriter-container {
   max-width: 100%; /* Adjust as needed */
   overflow: hidden; /* Prevent content from overflowing */
@@ -40,14 +33,4 @@
   text-align: center;
   margin: 10px;
   max-width: 530px;
-}
-
-.ml {
-  margin-top: 2.5em;
-  font-size: 24px;
-}
-
-.sl {
-  font-size: 20px;
-  margin-bottom: 2em;
 }

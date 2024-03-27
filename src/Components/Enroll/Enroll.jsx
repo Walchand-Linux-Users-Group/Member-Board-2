@@ -9,7 +9,7 @@ export default function Enroll({ onClick }) {
 
   return (
     <>
-      <div className="main">
+      <div className="main mt-5">
         <MovingBorderDemo
           onClick={() => {navigate("/register") }}
           text={"Enroll"}

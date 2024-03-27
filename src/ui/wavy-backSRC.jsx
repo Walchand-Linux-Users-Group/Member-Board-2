@@ -8,7 +8,6 @@ export const WavyBackground = ({
   colors,
   waveWidth,
   backgroundFill,
-  blur = 10,
   speed = "fast",
   waveOpacity = 0.5,
   ...props
@@ -30,8 +29,7 @@ export const WavyBackground = ({
   const init = () => {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
-    resizeCanvas(); // Call resizeCanvas initially
-    ctx.filter = `blur(${blur}px)`;
+    resizeCanvas(); 
     nt = 0;
     window.addEventListener("resize", resizeCanvas); // Listen for window resize
     render();
@@ -103,9 +101,9 @@ export const WavyBackground = ({
         className="absolute inset-0 -z-10"
         ref={canvasRef}
         id="canvas"
-        style={{
-          ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
-        }}
+        // style={{
+        //   ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
+        // }}
       ></canvas>
       <div className={"relative z-10 " + className} {...props}>
         {children}

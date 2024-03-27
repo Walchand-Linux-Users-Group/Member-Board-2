@@ -4,20 +4,12 @@ export default function Title() {
   return (
     <>
       <div className="contain">
-        <h1 className="title text-3xl md:text-5xl font-bold dark:text-white text-center">
-          Walchand Linux
+        <h1 className="title text-2xl md:text-3xl font-bold dark:text-white text-center">
+          Walchand Linux Users' Group
         </h1>
-        <h1 className="title2 text-3xl md:text-5xl font-bold dark:text-white text-center">
-          Users' Group
-        </h1>
-        <p className="motto dark text-1xl font-bold dark:text-white text-center"
-            >COMMUNITY | KNOWLEDGE | SHARE</p>
+        {/* <p className="motto dark text-1xl font-bold dark:text-white text-center"
+            >Brings to you</p> */}
       </div>
     </>
   );
-}
-
-/**
- *
- * className="dark text-3xl md:text-7xl font-bold dark:text-white text-center"
- */
+} 
