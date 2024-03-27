@@ -271,7 +271,7 @@ const ChatBot = () => {
                                         </div>
 
                                         <div className="ml-8 space-y-4">
-                                            <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-lg">
+                                            <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white  font-medium text-lg">
                                                 {curque.question}
                                             </div>
                                         </div>
@@ -283,7 +283,7 @@ const ChatBot = () => {
                                             </div>
                                             <div className="mt-8">
                                                 <div
-                                                    className="w-fit max-w-[50vw] cursor-pointer bg-[#B557C4] p-3 md:p-6 rounded-[15px] text-white font-chatbot font-semibold text-lg break-words"
+                                                    className="w-fit max-w-[50vw] cursor-pointer bg-[#B557C4] p-3 md:p-6 rounded-[15px] text-white  font-medium text-lg break-words"
                                                     id={`userres${curque.index}`}
                                                     onClick={() =>
                                                         makeEditable(
@@ -332,7 +332,7 @@ const ChatBot = () => {
                                                             {(close) => (
                                                                 <div className="bg-gray-800 rounded-lg shadow-lg min-w-[300px] max-h-[300px] overflow-y-auto custom-scrollbar">
                                                                     <div className="">
-                                                                        <h1 className="text-lg font-semibold text-gray-400 p-4 border-b border-gray-400">
+                                                                        <h1 className="text-lg font-medium text-gray-400 p-4 border-b border-gray-400">
                                                                             Select
                                                                             an
                                                                             option
@@ -437,14 +437,14 @@ const ChatBot = () => {
                         <div className="ml-8 space-y-4">
                             {/* Message */}
                             <div
-                                className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white font-chatbot font-semibold text-lg"
+                                className="max-w-[85%] w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 text-white  font-medium text-lg"
                                 id="tux-conv"
                             >
                                 <Typewriter text={currentQuestion.title} />
                             </div>
                             {/* Error */}
                             {error !== "" ? (
-                                <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6 font-chatbot font-semibold text-lg text-red-500">
+                                <div className="w-fit rounded-[15px] bg-indigo-700 p-3 md:p-6  font-medium text-lg text-red-500">
                                     <Typewriter text={error} id="tux-error" />
                                 </div>
                             ) : (
@@ -506,7 +506,7 @@ const ChatBot = () => {
                                             {(close) => (
                                                 <div className="bg-gray-800 rounded-lg shadow-lg min-w-[300px] max-h-[300px] overflow-y-auto custom-scrollbar">
                                                     <div className="">
-                                                        <h1 className="text-lg font-semibold text-gray-400 p-4 border-b border-gray-400">
+                                                        <h1 className="text-lg font-medium text-gray-400 p-4 border-b border-gray-400">
                                                             Select an option
                                                         </h1>
                                                         <div className="space-y-4">
