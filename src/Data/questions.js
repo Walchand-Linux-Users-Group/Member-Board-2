@@ -119,11 +119,6 @@ export default [
                 value: true,
                 message: "Please provide your favourite quote.",
             },
-            length: {
-                min: 5,
-                max: 100,
-                message: "Please provide a valid quote. (10-100 characters)",
-            },
         },
         field: "favoriteQuote",
     },
