@@ -26,7 +26,6 @@ const ChatBot = () => {
     // Function to handle change in input field value (main)
     const handleChange = (e) => {
         setError("");
-
         // Handling file input
         if (currentQuestion.ansType === "file") {
             setAnswers({
@@ -55,6 +54,26 @@ const ChatBot = () => {
             currentQuestion.ansType === "text" ||
             currentQuestion.ansType === "file"
         ) {
+            if (currentQuestion.ansType === "file") {
+                if (currentQuestion.field === "photo" && response) {
+                    if (
+                        response.type !== "image/jpeg" &&
+                        response.type !== "image/png" &&
+                        response.type !== "image/jpg"
+                    ) {
+                        setError(
+                            "Please upload a valid image file. (.png, .jpg, .jpeg)"
+                        );
+                        return false;
+                    }
+                }
+                if (currentQuestion.field === "resume" && response) {
+                    if (response.type !== "application/pdf") {
+                        setError("Please upload a valid pdf file. (.pdf)");
+                        return false;
+                    }
+                }
+            }
             if (currentQuestion.constraints) {
                 if (currentQuestion.constraints.required) {
                     if (response === "" || !response) {
@@ -158,7 +177,7 @@ const ChatBot = () => {
         // Validate the response
         const validation = validate(
             questions[answered[index].index],
-            answered[index].answer
+            answers[questions[answered[index].index].field]
         );
 
         if (!validation) {
@@ -217,6 +236,7 @@ const ChatBot = () => {
 
     // Function to handle edit of response (text)
     const handleEdit1 = (e, ind) => {
+        setError("");
         const editQuestion = answered[ind];
         setAnswers({
             ...answers,
@@ -229,6 +249,7 @@ const ChatBot = () => {
 
     // Function to handle edit of response (file)
     const handleEdit2 = (e, ind) => {
+        setError("");
         const editQuestion = answered[ind];
         console.log(e.target.files[0]);
         setAnswers({
@@ -310,9 +331,7 @@ const ChatBot = () => {
                                                                     ind
                                                                 )
                                                             }
-                                                            onFocus={(e) => {
-                                                                setError("");
-                                                            }}
+                                                            onFocus={(e) => {}}
                                                             autoComplete="off"
                                                         />
                                                     ) : curque.type ===
@@ -393,9 +412,7 @@ const ChatBot = () => {
                                                                     ind
                                                                 )
                                                             }
-                                                            onFocus={(e) => {
-                                                                setError("");
-                                                            }}
+                                                            onFocus={(e) => {}}
                                                             accept={
                                                                 questions[ind]
                                                                     .field ===
@@ -549,9 +566,7 @@ const ChatBot = () => {
                                         value={answers[currentQuestion.field]}
                                         id={currentQuestion.field}
                                         onChange={handleChange}
-                                        onFocus={(e) => {
-                                            setError("");
-                                        }}
+                                        onFocus={(e) => {}}
                                         autoComplete="off"
                                     ></input>
                                 )
