@@ -184,6 +184,8 @@ const ChatBot = () => {
             return;
         }
 
+        setError("")
+
         makeEditable(index);
         console.log(answers);
         console.log(answered);
@@ -236,7 +238,6 @@ const ChatBot = () => {
 
     // Function to handle edit of response (text)
     const handleEdit1 = (e, ind) => {
-        setError("");
         const editQuestion = answered[ind];
         setAnswers({
             ...answers,
@@ -249,7 +250,6 @@ const ChatBot = () => {
 
     // Function to handle edit of response (file)
     const handleEdit2 = (e, ind) => {
-        setError("");
         const editQuestion = answered[ind];
         console.log(e.target.files[0]);
         setAnswers({
