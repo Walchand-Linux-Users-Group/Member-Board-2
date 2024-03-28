@@ -184,7 +184,7 @@ const ChatBot = () => {
             return;
         }
 
-        setError("")
+        setError("");
 
         makeEditable(index);
         console.log(answers);
@@ -333,6 +333,16 @@ const ChatBot = () => {
                                                             }
                                                             onFocus={(e) => {}}
                                                             autoComplete="off"
+                                                            type={
+                                                                curque.field ===
+                                                                "email"
+                                                                    ? "email"
+                                                                    : curque.field ===
+                                                                      "mobileNo"
+                                                                    ? "number"
+                                                                    : "text"
+                                                            }
+
                                                         />
                                                     ) : curque.type ===
                                                       "options" ? (
@@ -568,6 +578,14 @@ const ChatBot = () => {
                                         onChange={handleChange}
                                         onFocus={(e) => {}}
                                         autoComplete="off"
+                                        type={
+                                            currentQuestion.field === "email"
+                                                ? "email"
+                                                : currentQuestion.field ===
+                                                  "mobileNo"
+                                                ? "number"
+                                                : "text"
+                                        }
                                     ></input>
                                 )
                             }
