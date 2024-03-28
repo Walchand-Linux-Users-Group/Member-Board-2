@@ -31,7 +31,7 @@ export default function Timer() {
   return (
     <div className="flex justify-center items-center box p-4 mt-4">
       <div className="text-center">
-        <p className="text-xl font-bold text-white">Time left :-</p>
+        <p className="text-xl font-bold text-white">Time left :</p>
         <div className="flex items-center justify-center mt-4">
           <div className="flex items-center">
             <p className="text-3xl md:text-4xl lg:text-4xl font-bold text-white">{timerDays}</p>
