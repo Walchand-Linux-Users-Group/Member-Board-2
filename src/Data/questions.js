@@ -148,7 +148,7 @@ export default [
         field: "submit",
     },
     {
-        title: "Thank you for applying. Your application has been submitted. Hope to see you soon at the interviews! 🐧",
+        title: "Thank you for applying. Your application has been submitted. Hope to see you soon and all the best! 🐧",
         ansType: "text",
         nextStep: 0,
         constraints: [],
