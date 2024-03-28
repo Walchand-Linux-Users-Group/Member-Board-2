@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import './Timer.css'
 
-export default function Timer() {
+let distt = 0
+
+function Timer() {
   const [timerDays, setTimerDays] = useState("0");
   const [timerHours, setTimerHours] = useState("0");
   const [timerMinutes, setTimerMinutes] = useState("0");
   let interval = useRef();
 
   const updateTimer = () => {
-    const countDownDate = new Date("March 31, 2024 23:59").getTime();
+    const countDownDate = new Date("April 1, 2024 22:00").getTime();
     const now = new Date().getTime();
     const dist = countDownDate - now;
     const days = Math.floor(dist / (1000 * 60 * 60 * 24));
@@ -52,3 +54,5 @@ export default function Timer() {
     </div>
   );
 }
+
+export default Timer

@@ -1,6 +1,5 @@
 import React from "react";
 import ChatBot from "../../Components/Chatbot/Chatbot";
-import { WavyBackground } from "../../ui/wavy-backSRC";
 
 const ChatbotPage = () => {
     return (

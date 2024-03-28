@@ -39,10 +39,6 @@
   }
 }
 
-.box:hover {
-  animation-play-state: paused;
-}
-
 /* Define the custom property */
 @property --border-angle {
   syntax: "<angle>";
