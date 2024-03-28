@@ -7,7 +7,7 @@ import { WavyBackground } from "./ui/wavy-backSRC";
 
 function App() {
     return (
-        <div className=" dark flex flex-row">
+        <div className=" dark flex flex-row fontt">
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage/>}></Route>
