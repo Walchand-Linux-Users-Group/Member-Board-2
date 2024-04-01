@@ -10,7 +10,7 @@ import Links from "../../Components/Aftertimer/Links";
 import Inter from "../../Components/Aftertimer/Inter";
 
 const HomePage = () => {
-  const countDownDate = new Date("April 1, 2024 22:00").getTime();
+  const countDownDate = new Date("April 2, 2024 00:00").getTime();
   const now = new Date().getTime();
   const dist = countDownDate - now;
   if (dist > 0){
