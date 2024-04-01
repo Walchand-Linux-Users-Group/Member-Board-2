@@ -10,7 +10,7 @@ function Timer() {
   let interval = useRef();
 
   const updateTimer = () => {
-    const countDownDate = new Date("April 1, 2024 23:00").getTime();
+    const countDownDate = new Date("April 2, 2024 01:00").getTime();
     const now = new Date().getTime();
     const dist = countDownDate - now;
     const days = Math.floor(dist / (1000 * 60 * 60 * 24));
