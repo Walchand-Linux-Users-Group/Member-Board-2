@@ -11,7 +11,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage/>}></Route>
-                    {/* <Route path="/register" element={<ChatbotPage/>}></Route> */}
+                    <Route path="/register" element={<ChatbotPage/>}></Route>
                 </Routes>
             </BrowserRouter>
             <div className="Back blur-md">
